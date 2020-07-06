@@ -14,6 +14,6 @@ function draw(){
   // Code here runs continuously
   background(220)
 
-  ellipse(50, 50, 50, 50)
+  // ellipse(50, 50, 50, 50)
 
 }
