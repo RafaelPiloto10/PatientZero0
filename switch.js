@@ -41,6 +41,12 @@ function draw() {
   // contained in that function.
   drawCenterLine();
 
+  if (mouseX > width/2) {
+    backgroundColor = color(0);
+  } else {
+    backgroundColor = color(95)
+  }
+  
   // The red and blue circles:
   fill(color1);
   ellipse(100, 200, 50);
@@ -49,7 +55,7 @@ function draw() {
 
   // The grey circle and the text:
   fill(textColor);
-  ellipse(50, 50, 50);
+  ellipse(mouseX, mouseY, 50);
   text("Flip the switch", 20, 20);
 }
 
