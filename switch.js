@@ -2,7 +2,7 @@
 
 /* global createCanvas, background, loadImage,
 image, color, noStroke, HSB, fill, ellipse, colorMode,
-text, stroke, line*/
+text, stroke, line, width*/
 
 // Content behind double slashes is a comment. Use it for plain English notes,
 // or for code that you want to temporarily disable.
@@ -11,9 +11,9 @@ text, stroke, line*/
 let backgroundColor, color1, color2, textColor, globalSaturation, globalBrightness;
 
 function setup() {
- 
+  
   // Canvas & color settings
-  createCanvas(600, 400);
+  createCanvas(400, 400);
   
   colorMode(HSB, 360, 100, 100);
   noStroke();
@@ -58,6 +58,6 @@ function drawCenterLine() {
   // back off.
   // Remember a line segment in p5.js has four arguments: x1, y1, x2, y2
   stroke(textColor);
-  line(, 0, , 400);
+  line(width/2, 0, width/2, 400);
   noStroke();
 }
