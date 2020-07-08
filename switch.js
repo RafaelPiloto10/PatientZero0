@@ -8,27 +8,29 @@ text, stroke, line*/
 // or for code that you want to temporarily disable.
 
 // We'll use variables for most of our colors in this code-along.
-let backgroundColor, color1, color2, textColor;
+let backgroundColor, color1, color2, textColor, globalSaturation, globalBrightness;
 
 function setup() {
   // Canvas & color settings
   createCanvas(400, 400);
   
   colorMode(HSB, 360, 100, 100);
-  colorMode(RGB, 255, 255, 255);
   noStroke();
 
   // When used with only one argument, the color mode is greyscale.
   // 0 is black and 100 is white.
   backgroundColor = color(95);
   textColor = color(20);
+  
+  globalSaturation = 80;
+  globalBrightness = 80;
   // When used with three arguments, the function takes, in this order:
   // HUE - 0 to 360 degrees on a color wheel - 0 is red, 120 is green and 240
   //       is blue.
   // SATURATION - 0 is no color (greyscale), and 100 is as bold as possible.
   // BRIGHTNESS - 0 is no light (black), and 100 is as bright as possible.
-  color1 = color(0, 80, 80);
-  color2 = color(200, 80, 80);
+  color1 = color(0, globalSaturation, globalBrightness);
+  color2 = color(200, globalSaturation, globalBrightness);
 }
 
 function draw() {
@@ -38,6 +40,7 @@ function draw() {
 
   // The red and blue circles:
   fill(color1);
+
   ellipse(100, 200, 50);
   fill(color2);
   ellipse(300, 200, 50);
