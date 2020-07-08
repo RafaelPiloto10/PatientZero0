@@ -11,8 +11,9 @@ text, stroke, line*/
 let backgroundColor, color1, color2, textColor, globalSaturation, globalBrightness;
 
 function setup() {
+ 
   // Canvas & color settings
-  createCanvas(400, 400);
+  createCanvas(600, 400);
   
   colorMode(HSB, 360, 100, 100);
   noStroke();
@@ -24,6 +25,7 @@ function setup() {
   
   globalSaturation = 80;
   globalBrightness = 80;
+  
   // When used with three arguments, the function takes, in this order:
   // HUE - 0 to 360 degrees on a color wheel - 0 is red, 120 is green and 240
   //       is blue.
@@ -37,10 +39,10 @@ function draw() {
   background(backgroundColor);
   // Call the drawCenterLine function here to run the three lines of code
   // contained in that function.
+  drawCenterLine();
 
   // The red and blue circles:
   fill(color1);
-
   ellipse(100, 200, 50);
   fill(color2);
   ellipse(300, 200, 50);
@@ -56,6 +58,6 @@ function drawCenterLine() {
   // back off.
   // Remember a line segment in p5.js has four arguments: x1, y1, x2, y2
   stroke(textColor);
-  line(200, 0, 200, 400);
+  line(, 0, , 400);
   noStroke();
 }
