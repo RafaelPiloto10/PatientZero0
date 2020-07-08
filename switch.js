@@ -1,7 +1,7 @@
 // Name any p5.js functions we use in the global so Glitch can recognize them.
 
 /* global createCanvas, background, loadImage,
-image, color, noStroke, HSB, fill, ellipse, colorMode,
+image, color, noStroke, HSB, fill, ellipse, mouseX, mouseY, colorMode,
 text, stroke, line, width*/
 
 // Content behind double slashes is a comment. Use it for plain English notes,
@@ -42,9 +42,9 @@ function draw() {
   drawCenterLine();
 
   if (mouseX > width/2) {
-    backgroundColor = color(0);
+    // dayMode();
   } else {
-    backgroundColor = color(95)
+    // nightMode();
   }
   
   // The red and blue circles:
