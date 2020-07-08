@@ -13,7 +13,9 @@ let backgroundColor, color1, color2, textColor;
 function setup() {
   // Canvas & color settings
   createCanvas(400, 400);
+  
   colorMode(HSB, 360, 100, 100);
+  colorMode(RGB, 255, 255, 255);
   noStroke();
 
   // When used with only one argument, the color mode is greyscale.
@@ -33,7 +35,6 @@ function draw() {
   background(backgroundColor);
   // Call the drawCenterLine function here to run the three lines of code
   // contained in that function.
-
 
   // The red and blue circles:
   fill(color1);
