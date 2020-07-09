@@ -20,6 +20,7 @@ function draw() {
 }
 
 function chooseColors() {
+  brushHue += 1;
   stroke(brushHue, 50, 80);
   fill(brushHue, 50, 80);
 }
