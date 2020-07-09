@@ -19,8 +19,9 @@ function draw() {
   rect(mouseX, mouseY, 15, 15);
 }
 
-function chooseColors() {
+function chooseColors() { 
   brushHue += 1;
+  console.log(brushHue)
   stroke(brushHue, 50, 80);
   fill(brushHue, 50, 80);
 }
