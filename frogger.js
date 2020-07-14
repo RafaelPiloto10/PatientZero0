@@ -154,7 +154,7 @@ function checkCollisions() {
       score++;
       Coin7 = random(width);
       Coin8 = random(height);
-    
+    }
   }
 }
 
@@ -216,9 +216,9 @@ function drawCoins() {
 }
 
 function level2() {
-  fill("blue")
+  fill("blue");
   rect(riverX, riverY, width, 30);
-  fill("brown")
+  fill("brown");
   rect(logX, logY, 100, 30);
   
   // Reset position
@@ -229,8 +229,9 @@ function level2() {
   // Log should move
   logX += logVelocity;
   
-  if (frogY == riverY && frogX<logX && frogX>(logX+100)) {
-    gameIsOVer = true
+  if ((frogY == riverY) && (frogX<logX) && (frogX>logX+100)) {
+    resetFrog();
+    lives -= 1;
   }
 }  
 
@@ -251,4 +252,4 @@ function level2() {
 // Make the game get more and more challenging as you win more and more times.
 // Color code your player pieces.
 // Using some ideas from yesterday’s game, add some collectible power-ups that make you temporarily invincible, faster, smaller, or rainbow-colored.
-// Add features like a river to the background - make some additional modifications to the gameplay - perhaps falling into the river also sends you back. Add logs that float.
+// Add a timer.
