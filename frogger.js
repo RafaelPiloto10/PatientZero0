@@ -7,8 +7,8 @@
 /* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, textSize, text, loadImage, image
 */
 
-let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V, car2X, car2Y, car2V Coin1, Coin2, Coin3, Coin4;
-let img;
+let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V, car2X, car2Y, car2V, Coin1, Coin2, Coin3, Coin4, Coin5, Coin6, Coin7, Coin8;
+let img, riverX, riverY, logX, logY, logVelocity;
 
 function setup() {
   // Canvas & color settings
@@ -23,12 +23,22 @@ function setup() {
   car1Y = 100;
   car1V = 5;
   car2X = 0;
-  car2Y = 80;
+  car2Y = 320;
   car2V = 5;
+  riverX = 0;
+  riverY = height/2;
+  logX = 0;
+  logY = height/2;
+  logVelocity = 2;
   Coin1 = random(width);
   Coin2 = random(height);
   Coin3 = random(width);
   Coin4 = random(height);
+  Coin5 = random(width);
+  Coin6 = random(height);
+  Coin7 = random(width);
+  Coin8 = random(height);
+  
   
   img = loadImage("https://cdn.glitch.com/2205754a-27cc-4886-b927-edc5ba24c044%2Fkisspng-frogger-ancient-shadow-frogger-s-adventures-temp-pixel-vector-5ad82e3bd64588.5481840415241170518777.png?v=1594765212681")
 }
@@ -48,6 +58,7 @@ function draw() {
   checkWin();
   displayScores();
   drawCoins();
+  level2();
 }
 
 // Called by p5
@@ -90,7 +101,7 @@ function moveCars() {
   // Reset if it moves off screen
   if (car2X >= width) {
     car2X = -30;
-  
+  }
 }
 
 
@@ -99,7 +110,7 @@ function drawCars() {
   fill(0, 80, 80);
   rect(car1X, car1Y, 40, 30);
   // Code for additional cars
-    fill(0, 80, 80);
+  fill(0, 80, 80);
   rect(car2X, car2Y, 40, 30);
 }
 
@@ -108,6 +119,7 @@ function checkCollisions() {
   if (collideRectCircle(car1X, car1Y, 40, 30, frogX, frogY, 20)) {
     resetFrog();
     lives -= 1; 
+  }
   if (collideRectCircle(car2X, car2Y, 40, 30, frogX, frogY, 20)) {
     resetFrog();
     lives -= 1; 
@@ -132,16 +144,17 @@ function checkCollisions() {
       Coin3 = random(width);
       Coin4 = random(height);
     }
+    if (collideCircleCircle(Coin5, Coin6, 20, frogX, frogY, 30)) {
+      score++;
+      Coin5 = random(width);
+      Coin6 = random(height);
+    }  
     
-//     if (collideCircleCircle(coin3, coin4, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin2();
-//     } 
+    if (collideCircleCircle(Coin7, Coin8, 20, frogX, frogY, 30)) {
+      score++;
+      Coin7 = random(width);
+      Coin8 = random(height);
     
-//     if (collideCircleCircle(coin5, coin6, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin3();
-//     }
   }
 }
 
@@ -193,16 +206,39 @@ function drawCoins() {
   
   fill("red");
   ellipse(Coin3, Coin4, 20);
+  
+  fill("orange");
+  ellipse(Coin5, Coin6, 20);
+  
+  fill("white");
+  ellipse(Coin7, Coin8, 20);
+
 }
 
-function levelUp() {
-  if (score == 3) {
-    fill("blue")
-    rect(0, height/2, width, 30);
-    fill("brown")
-    rect(riv, car1Y, 60, 30);
+function level2() {
+  fill("blue")
+  rect(riverX, riverY, width, 30);
+  fill("brown")
+  rect(logX, logY, 100, 30);
+  
+  // Reset position
+  if (logX >= width) {
+    logX = -30;
   }
-}
+  
+  // Log should move
+  logX += logVelocity;
+  
+  if (frogY == riverY && frogX<logX && frogX>(logX+100)) {
+    gameIsOVer = true
+  }
+}  
+
+// function levelUp() {
+//   if (score == 3) {
+//     level2();
+//   }
+// }
 
 // CHALLENGES
 // 1) code out a You WIN message when score == #
