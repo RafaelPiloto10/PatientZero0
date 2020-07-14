@@ -4,7 +4,7 @@
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, textSize, text
+/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, textSize, text
 */
 
 let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V;
@@ -14,8 +14,8 @@ function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
-  frogX = random(width);
-  frogY = random(height);
+  frogX = width/2;
+  frogY = height - 100;
   score = 0;
   lives = 3;
   gameIsOver = false;
@@ -40,16 +40,29 @@ function draw() {
 }
 
 function keyPressed() {
+  // This allows you to click multiple arrows at the same time
   if (keyCode === UP_ARROW) {
     frogY -= 10;
+  }
+  if (keyCode === DOWN_ARROW) {
+    frogY += 10;
+  }
+  if (keyCode === LEFT_ARROW) {
+    frogX -= 10;
+  }
+  if (keyCode === RIGHT_ARROW) {
+    frogX += 10;
   }
 }
 
 function moveCars() {
   // Move the car
-
+  car1X += car1V; 
+  
   // Reset if it moves off screen
-
+  if (car1X >= width) {
+    car1X = 0;
+  }
 }
 
 function drawCars() {
