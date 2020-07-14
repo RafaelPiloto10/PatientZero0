@@ -4,7 +4,7 @@
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, textSize, text
+/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, textSize, text
 */
 
 let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V;
@@ -41,17 +41,27 @@ function draw() {
 // Called by p5
 function keyPressed() {
   // This allows you to click multiple arrows at the same time
-  if (keyCode === UP_ARROW) {
-    frogY -= 10;
+  if (!gameIsOver) {
+    if (keyCode === UP_ARROW) {
+      frogY -= 10;
+    }
+    if (keyCode === DOWN_ARROW) {
+      frogY += 10;
+    }
+    if (keyCode === LEFT_ARROW) {
+      frogX -= 10;
+    }
+    if (keyCode === RIGHT_ARROW) {
+      frogX += 10;
+    } 
   }
-  if (keyCode === DOWN_ARROW) {
-    frogY += 10;
-  }
-  if (keyCode === LEFT_ARROW) {
-    frogX -= 10;
-  }
-  if (keyCode === RIGHT_ARROW) {
-    frogX += 10;
+  
+  // Runs any time
+  if (keyCode === SPACE) {
+    lives = 3;
+    resetFrog();
+    gameIsOver = false;
+    score = 0;
   }
 }
 
@@ -113,6 +123,12 @@ function displayScores() {
   // Display Score
   text(`Score: ${score}`, 10, 40);
   
+  // Display win message
+  if (score == 5 && gameIsOver) {
+    textSize (45);
+    text("YOU WIN!", width/4, height/2);
+  }
+  
   // Display game over message if the game is over
   if (gameIsOver) {
     // Draw Game Over text
@@ -120,3 +136,8 @@ function displayScores() {
     text("GAME OVER", width/4, height/2);
   }
 }
+
+// CHALLENGES
+// 1) code out a You WIN message when score == #
+// 2) code out responding to a specific key that resets the game
+// 3) code out protections against accepting user input (movement) when the game is marked as over
