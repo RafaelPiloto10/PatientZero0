@@ -4,10 +4,11 @@
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, textSize, text
+/* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, textSize, text, loadImage, image
 */
 
-let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V;
+let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V, Coin1, Coin2, Coin3, Coin4;
+let img;
 
 function setup() {
   // Canvas & color settings
@@ -21,6 +22,12 @@ function setup() {
   car1X = 0;
   car1Y = 100;
   car1V = 5;
+  Coin1 = random(width);
+  coin2= random(height)
+  Coin3 =
+  Coin3 = 
+  Coin4 = 
+  img = loadImage("https://png2.cleanpng.com/sh/a02aeddbe0b3b6ca57bfdb29420ab566/L0KzQYm3VME6N6dqfZH0aYP2gLBuTfZzd5hsfeQ2YX7mebb1lL10cJJphAk2ZoLyd7jskr10NZJpjtd3dIX1dcS0lPVueF51gepubD35dbT7jCIuPZJpUKRuM3LnRoW8WMgvPWU9Sao9MES0RYO7UcE4OGY2UKkCNz7zfri=/kisspng-frogger-ancient-shadow-frogger-s-adventures-temp-pixel-vector-5ad82e3bd64588.5481840415241170518777.png");
 }
 
 function draw() {
@@ -30,12 +37,14 @@ function draw() {
   rect(0, 0, width, 50);
   // Code to display Frog
   fill(120, 80, 80);
-  ellipse(frogX, frogY, 20);
+  image(img,frogX, frogY,20,20);
+  //ellipse(frogX, frogY, 20);
   moveCars();
   drawCars();
   checkCollisions();
   checkWin();
   displayScores();
+  //drawCoins();
 }
 
 // Called by p5
@@ -137,7 +146,40 @@ function displayScores() {
   }
 }
 
+// function handleCoins {
+//   if (!gameIsOver) {
+    
+//     if (collideCircleCircle(coinX, coinY, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin();
+//     }  
+    
+//     if (collideCircleCircle(coin1, coin2, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin1();
+//     }
+    
+//     if (collideCircleCircle(coin3, coin4, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin2();
+//     } 
+    
+//     if (collideCircleCircle(coin5, coin6, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin3();
+//     }
+//   }
+// }
+
 // CHALLENGES
 // 1) code out a You WIN message when score == #
 // 2) code out responding to a specific key that resets the game
 // 3) code out protections against accepting user input (movement) when the game is marked as over
+
+// Add multiple cars.
+// Add a certain goal - i.e. score 5 times to end the game.
+// Make it so that you can only move the frog if the game is not over.
+// Make the game get more and more challenging as you win more and more times.
+// Color code your player pieces.
+// Using some ideas from yesterday’s game, add some collectible power-ups that make you temporarily invincible, faster, smaller, or rainbow-colored.
+// Add features like a river to the background - make some additional modifications to the gameplay - perhaps falling into the river also sends you back. Add logs that float.
