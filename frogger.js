@@ -14,8 +14,7 @@ function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
-  frogX = width/2;
-  frogY = height - 100;
+  resetFrog();
   score = 0;
   lives = 3;
   gameIsOver = false;
@@ -39,6 +38,7 @@ function draw() {
   displayScores();
 }
 
+// Called by p5
 function keyPressed() {
   // This allows you to click multiple arrows at the same time
   if (keyCode === UP_ARROW) {
@@ -75,8 +75,7 @@ function drawCars() {
 function checkCollisions() {
   // If the frog collides with the car, reset the frog and subtract a life.
   if (collideRectCircle(car1X, car1Y, 40, 30, frogX, frogY, 20)) {
-    frogX = width/2; 
-    frogY = height - 100;
+    resetFrog();
     lives -= 1; 
   }
   
@@ -93,16 +92,31 @@ function checkWin() {
   // Option 1: Check collision w/ the yellow box
   
   // Option 2: Check the Y position of the frog
-  if (frogY <= 50) 
+  if (frogY <= 50) {
+    score += 1;
+    resetFrog();
+  }
+}
+
+function resetFrog() {
+  frogX = width/2; 
+  frogY = height - 100;
 }
 
 function displayScores() {
   textSize(12);
   fill(0);
+  
   // Display Lives
   text(`Lives: ${lives}`, 10, 20);
+  
   // Display Score
-
+  text(`Score: ${score}`, 10, 40);
+  
   // Display game over message if the game is over
-
+  if (gameIsOver) {
+    // Draw Game Over text
+    textSize(45);
+    text("GAME OVER", width/4, height/2);
+  }
 }
