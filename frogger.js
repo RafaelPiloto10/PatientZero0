@@ -7,7 +7,7 @@
 /* global createCanvas, colorMode, random, width, height, background, fill, rect, ellipse, HSB, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, SPACE, textSize, text, loadImage, image
 */
 
-let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V, Coin1, Coin2, Coin3, Coin4;
+let backgroundColor, frogX, frogY, score, lives, gameIsOver, car1X, car1Y, car1V, car2X, car2Y, car2V Coin1, Coin2, Coin3, Coin4;
 let img;
 
 function setup() {
@@ -22,29 +22,32 @@ function setup() {
   car1X = 0;
   car1Y = 100;
   car1V = 5;
+  car2X = 0;
+  car2Y = 80;
+  car2V = 5;
   Coin1 = random(width);
-  coin2= random(height)
-  Coin3 =
-  Coin3 = 
-  Coin4 = 
-  img = loadImage("https://png2.cleanpng.com/sh/a02aeddbe0b3b6ca57bfdb29420ab566/L0KzQYm3VME6N6dqfZH0aYP2gLBuTfZzd5hsfeQ2YX7mebb1lL10cJJphAk2ZoLyd7jskr10NZJpjtd3dIX1dcS0lPVueF51gepubD35dbT7jCIuPZJpUKRuM3LnRoW8WMgvPWU9Sao9MES0RYO7UcE4OGY2UKkCNz7zfri=/kisspng-frogger-ancient-shadow-frogger-s-adventures-temp-pixel-vector-5ad82e3bd64588.5481840415241170518777.png");
+  Coin2 = random(height);
+  Coin3 = random(width);
+  Coin4 = random(height);
+  
+  img = loadImage("https://cdn.glitch.com/2205754a-27cc-4886-b927-edc5ba24c044%2Fkisspng-frogger-ancient-shadow-frogger-s-adventures-temp-pixel-vector-5ad82e3bd64588.5481840415241170518777.png?v=1594765212681")
 }
 
 function draw() {
   background(backgroundColor);
-  // Code for gold goal line
+  // Code for gold goal lin
   fill(60, 80, 80);
   rect(0, 0, width, 50);
   // Code to display Frog
   fill(120, 80, 80);
-  image(img,frogX, frogY,20,20);
+  image(img,frogX, frogY,40,40);
   //ellipse(frogX, frogY, 20);
   moveCars();
   drawCars();
   checkCollisions();
   checkWin();
   displayScores();
-  //drawCoins();
+  drawCoins();
 }
 
 // Called by p5
@@ -82,13 +85,22 @@ function moveCars() {
   if (car1X >= width) {
     car1X = -30;
   }
+  car2X += car2V; 
+  
+  // Reset if it moves off screen
+  if (car2X >= width) {
+    car2X = -30;
+  
 }
+
 
 function drawCars() {
   // Code for car 1
   fill(0, 80, 80);
   rect(car1X, car1Y, 40, 30);
   // Code for additional cars
+    fill(0, 80, 80);
+  rect(car2X, car2Y, 40, 30);
 }
 
 function checkCollisions() {
@@ -96,11 +108,40 @@ function checkCollisions() {
   if (collideRectCircle(car1X, car1Y, 40, 30, frogX, frogY, 20)) {
     resetFrog();
     lives -= 1; 
+  if (collideRectCircle(car2X, car2Y, 40, 30, frogX, frogY, 20)) {
+    resetFrog();
+    lives -= 1; 
   }
   
   // Handle when out of lives
   if (lives === 0) {
     gameIsOver = true;
+  }
+  
+  // Handle powerups/coins
+  if (!gameIsOver) {
+    
+    if (collideCircleCircle(Coin1, Coin2, 20, frogX, frogY, 30)) {
+      score++;
+      Coin1 = random(width);
+      Coin2 = random(height);
+    }  
+    
+    if (collideCircleCircle(Coin3, Coin4, 20, frogX, frogY, 30)) {
+      score++;
+      Coin3 = random(width);
+      Coin4 = random(height);
+    }
+    
+//     if (collideCircleCircle(coin3, coin4, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin2();
+//     } 
+    
+//     if (collideCircleCircle(coin5, coin6, 20, mouseX, mouseY, 20)) {
+//       score++;
+//       moveCoin3();
+//     }
   }
 }
 
@@ -146,30 +187,22 @@ function displayScores() {
   }
 }
 
-// function handleCoins {
-//   if (!gameIsOver) {
-    
-//     if (collideCircleCircle(coinX, coinY, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin();
-//     }  
-    
-//     if (collideCircleCircle(coin1, coin2, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin1();
-//     }
-    
-//     if (collideCircleCircle(coin3, coin4, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin2();
-//     } 
-    
-//     if (collideCircleCircle(coin5, coin6, 20, mouseX, mouseY, 20)) {
-//       score++;
-//       moveCoin3();
-//     }
-//   }
-// }
+function drawCoins() {
+  fill("grey");
+  ellipse(Coin1, Coin2, 20);
+  
+  fill("red");
+  ellipse(Coin3, Coin4, 20);
+}
+
+function levelUp() {
+  if (score == 3) {
+    fill("blue")
+    rect(0, height/2, width, 30);
+    fill("brown")
+    rect(riv, car1Y, 60, 30);
+  }
+}
 
 // CHALLENGES
 // 1) code out a You WIN message when score == #
