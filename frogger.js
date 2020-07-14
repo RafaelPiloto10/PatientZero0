@@ -253,3 +253,11 @@ function level2() {
 // Color code your player pieces.
 // Using some ideas from yesterday’s game, add some collectible power-ups that make you temporarily invincible, faster, smaller, or rainbow-colored.
 // Add a timer.
+// Make the frog rotate with the arrow keys.
+// Add sound by including the sound library
+// Use images instead of shapes
+// Add water / logs where touching the water but not he log == death
+// Add "slots" in the goalline where if you don't fit in the slot you die (like in the real game)
+
+// CURRENT STATUS:
+// The river doesn't kill the frog and is drawn over it.
