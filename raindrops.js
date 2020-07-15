@@ -30,7 +30,7 @@ function draw() {
   // Etc.
   drop4.drip();
   drop4.show();
-
+  
 }
 
 class RainDrop {
