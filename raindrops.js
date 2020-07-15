@@ -4,6 +4,8 @@ global createCanvas, colorMode, background, HSB, height, random, width, noStroke
 
 let drop1x, drop1y, drop2x, drop2y, drop2d, drop2FallSpeed, drop1Diameter, drop1FallSpeed;
 
+let drop1, drop2, drop3, drop4
+
 function setup() {
   createCanvas(500, 500);
   colorMode(HSB, 100);
@@ -32,17 +34,17 @@ function draw() {
 }
 
 class RainDrop {
-  constructor(d) {
+  constructor(diameter) {
     this.x = random(width);
     this.y = random(height);
-    this.d = d;
+    this.diameter = diameter;
     this.fallSpeed = random(5, 10);
   }
 
   show() {
     noStroke();
     fill(60, 80, 80);
-    ellipse(this.x, this.y, this.d);
+    ellipse(this.x, this.y, this.diameter);
   }
 
   drip() {
