@@ -26,7 +26,7 @@ function setup() {
   
   dots = [];
   
-  for (let x = 0; x < 1000; x++) {
+  for (let x = 0; x < 500; x++) {
     dots.push(new BouncyDot());
   }
   
