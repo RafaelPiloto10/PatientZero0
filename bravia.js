@@ -2,23 +2,37 @@
 random, width, height, fill, ellipse, noStroke
 */
 
-let dot1;
+let dot1, dot2, dot3;
+
+let dots;
 
 function setup() {
   createCanvas(windowWidth - 20, windowHeight - 20);
   colorMode(HSL, 360, 100, 100);
   dot1 = new BouncyDot();
+  dot2 = new BouncyDot();
+  dot3 = new BouncyDot();
+  
+  dots = [dot1, dot2, dot3];
 }
 
+//   dots = [dot1, dot2, dot3];
+//.           0      1     2
 function draw() {
   background(220, 0, 80);
   dot1.float();
   dot1.display();
+  
+  dot2.float();
+  dot2.display();
+  
+  dot3.float();
+  dot3.display();
 }
 
 function mousePressed() {
   // We'll use this for console log statements only.
-  console.log(dot1.x);
+  console.log(dots[0]);
 }
 
 class BouncyDot {
