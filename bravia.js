@@ -2,22 +2,31 @@
 random, width, height, fill, ellipse, noStroke
 */
 
-let dot1, dot2, dot3, dot4;
+let dot1, dot2, dot3, dot4, dot5;
 
 let dots;
 
 function setup() {
   createCanvas(windowWidth - 20, windowHeight - 20);
   colorMode(HSL, 360, 100, 100);
-  dot1 = new BouncyDot();
-  dot2 = new BouncyDot();
-  dot3 = new BouncyDot();
+//   dot1 = new BouncyDot();
+//   dot2 = new BouncyDot();
+//   dot3 = new BouncyDot();
   
-  dots = [dot1, dot2, dot3];
+//   dots = [dot1, dot2, dot3];
+  dots = [new BouncyDot(), new BouncyDot(), new BouncyDot()]
   
-  dot4 = new BouncyDot();
+  // dot4 = new BouncyDot();
+  // dot5 = new BouncyDot();
   
-  dots.push(dot4);
+  // dots.push(dot4);
+  // dots.push(dot5);
+  dots.push(new BouncyDot());
+  dots.push(new BouncyDot());
+  
+  
+  
+  
 }
 
 //   dots = [dot1, dot2, dot3];
@@ -46,7 +55,7 @@ function draw() {
   // 2) as long as i < 4, keep looping
   // 3) after each loop, add 1 to i
   
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < dots.length; i++) {
     dots[i].float();
     dots[i].display();
   }
