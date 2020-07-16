@@ -2,7 +2,7 @@
 random, width, height, fill, ellipse, noStroke
 */
 
-let dot1, dot2, dot3;
+let dot1, dot2, dot3, dot4;
 
 let dots;
 
@@ -14,25 +14,48 @@ function setup() {
   dot3 = new BouncyDot();
   
   dots = [dot1, dot2, dot3];
+  
+  dot4 = new BouncyDot();
+  
+  dots.push(dot4);
 }
 
 //   dots = [dot1, dot2, dot3];
 //.           0      1     2
 function draw() {
   background(220, 0, 80);
-  dot1.float();
-  dot1.display();
   
-  dot2.float();
-  dot2.display();
+  // dot1.float();
+  // dot1.display();
   
-  dot3.float();
-  dot3.display();
+//   dots[0].float();
+//   dots[0].display();
+  
+//   dots[1].float();
+//   dots[1].display();
+  
+//   dots[2].float();
+//   dots[2].display();
+  
+//   dots[3].float();
+//   dots[3].display();
+  
+  
+  
+  // 1) create a variable i = 0
+  // 2) as long as i < 4, keep looping
+  // 3) after each loop, add 1 to i
+  
+  for (let i = 0; i < 4; i++) {
+    dots[i].float();
+    dots[i].display();
+  }
+  
 }
 
 function mousePressed() {
   // We'll use this for console log statements only.
-  console.log(dots[0]);
+  console.log(dots);
 }
 
 class BouncyDot {
