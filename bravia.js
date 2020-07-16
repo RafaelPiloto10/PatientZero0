@@ -14,17 +14,19 @@ function setup() {
 //   dot3 = new BouncyDot();
   
 //   dots = [dot1, dot2, dot3];
-  dots = [new BouncyDot(), new BouncyDot(), new BouncyDot()]
+//   dots = [new BouncyDot(), new BouncyDot(), new BouncyDot()]
   
-  // dot4 = new BouncyDot();
-  // dot5 = new BouncyDot();
+//   // dot4 = new BouncyDot();
+//   // dot5 = new BouncyDot();
   
-  // dots.push(dot4);
-  // dots.push(dot5);
-  dots.push(new BouncyDot());
-  dots.push(new BouncyDot());
+//   // dots.push(dot4);
+//   // dots.push(dot5);
+//   dots.push(new BouncyDot());
+//   dots.push(new BouncyDot());
   
-  for (let x = 0; x < 100; x++) {
+  dots = [];
+  
+  for (let x = 0; x < 1000; x++) {
     dots.push(new BouncyDot());
   }
   
