@@ -24,6 +24,9 @@ function setup() {
   dots.push(new BouncyDot());
   dots.push(new BouncyDot());
   
+  for (let x = 0; x < 100; x++) {
+    dots.push(new BouncyDot());
+  }
   
   
   
