@@ -50,7 +50,7 @@ class Snake {
       this.y = y;
       this.direction = dir;
     }
-    this.speed = 12;
+    this.speed = 10;
     this.snake = null;
     this.size = 10;
   }
@@ -84,18 +84,7 @@ class Snake {
   }
 
   checkApples() {
-    if (
-      collideRectRect(
-        this.x,
-        this.y,
-        10,
-        10,
-        currentApple.x,
-        currentApple.y,
-        10,
-        10
-      )
-    ) {
+    if (collideRectRect(this.x,this.y,10,10,currentApple.x,currentApple.y,10,10)) {
       this.extendTail();
       currentApple.move(); //add another segment and move the apple
     }
