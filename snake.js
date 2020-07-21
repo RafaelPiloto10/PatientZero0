@@ -18,7 +18,7 @@ function setup() {
   backgroundColor = 95;
   rate=12;
   frameRate(rate);
-  playerSnake = new Snake();
+  playerSnake = new Snake(null,null,null);
   currentApple = new Apple();
   score = 0;
 }
@@ -39,15 +39,22 @@ function draw() {
 function displayScore() {}
 
 class Snake {
-  constructor() {
-    this.size = 10;
-    this.x = width/2;
-    this.y = height - 10;
-    this.direction = 'N';
+  constructor(x,y,dir)
+  {
+    if(x==null){//checks if this is the head
+      this.x = width/2;
+      this.y = height - 10;
+      this.direction = 'N';
+    }
+    else{
+      this.x = x;
+      this.y = y;
+      this.direction = dir;
+    }
     this.speed = 12;
     this.snake=null;
+    this.size = 10;
   }
-  
 
   moveSelf() {
     if (this.direction === "N") {
@@ -68,12 +75,15 @@ class Snake {
     noFill();
     rect(this.x, this.y, this.size, this.size);
     noStroke();
+    if(this.snake!=null){
+      this.snake.showSelf()
+    }
   }
 
   checkApples() {
     if (collideRectRect(this.x,this.y,10,10,currentApple.x,currentApple.y,10,10)){
-      this.extendTail()
-        
+      this.extendTail();
+      currentApple.move(); //add another segment and move the apple
     }
   }
 
@@ -82,8 +92,20 @@ class Snake {
   }
 
   extendTail() {
-    if(this.snake==null)
-      this.snake=new Snake();
+    if(this.snake==null){
+      let x=this.x,y=this.y;
+      if (this.direction === "N") 
+        y += this.size;
+      else if (this.direction === "S") 
+        y -= this.size;
+      else if (this.direction === "E") 
+        x -= this.size;
+     else if (this.direction === "W") 
+        x += this.size;
+     else 
+        console.log("Error: invalid direction");
+      this.snake=new Snake(x,y,this.direction);
+    }
     else
       this.snake.extendTail();
   }
