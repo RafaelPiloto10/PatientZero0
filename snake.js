@@ -39,12 +39,14 @@ function draw() {
   displayScore();
   if(lives == 0){
     gameIsOver = true;
+    gameOver();
   }
 }
 
 function displayScore() 
 {
   text("Current Score: "+score,10,10)
+  text("Lives: "+lives, 10, 20) //text(`Score: ${score}`, 20, 20);
 }
 
 class Snake {
@@ -62,6 +64,7 @@ class Snake {
     this.speed = 10;
     this.snake = null;
     this.size = 10;
+    this.color=color(random(360),80,80);
   }
 
   moveSelf() {
@@ -83,8 +86,8 @@ class Snake {
   }
 
   showSelf() {
-    stroke(240, 100, 100);
-    fill(240, 100, 100);
+    stroke(this.color);
+    fill(this.color);
     rect(this.x, this.y, this.size, this.size);
     noStroke();
     if (this.snake != null) {
@@ -106,14 +109,18 @@ class Snake {
   }
 
   checkCollisions() {
-    let iter=this.snake
-    if(this.x>width-10||this.x<0||this.y>height-10||this.y<0){
-      gameOver();
-      return;
-    }
-    while(iter!=null){
+    let iter=this.snake;
+    // if(this.x>width-10||this.x<0||this.y>height-10||this.y<0){
+    //   lives--;
+    //   if(lives<=0)
+    //     gameOver();
+      //return;
+    //}
+    while(iter != null){
       if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)){
-        gameOver();
+        lives--;
+        if(lives<=0)
+          gameOver();
         return;
       }
       iter=iter.snake;
