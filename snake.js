@@ -1,6 +1,6 @@
 /* global createCanvas, colorMode, HSB, background, ellipse, rect, text, 
 mouseX, mouseY, round, sqrt, backgroundColor, color, random, width, height
-frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
+frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, loop, noLoop
 */
 
 // Since this example code uses the p5 collide2d library, be sure to remind
@@ -9,7 +9,7 @@ frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOW
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-let backgroundColor, playerSnake, currentApple, score, rate;
+let backgroundColor, playerSnake, currentApple, score, rate, gameIsOver;
 
 function setup() {
   // Canvas & color settings
@@ -21,6 +21,7 @@ function setup() {
   playerSnake = new Snake(null, null, null);
   currentApple = new Apple();
   score = 0;
+  gameIsOver=false;
 }
 
 function draw() {
@@ -90,7 +91,16 @@ class Snake {
     }
   }
 
-  checkCollisions() {}
+  checkCollisions() {
+    let iter=this.snake
+    while(iter!=null){
+      if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)){
+        gameOver();
+        break;
+      }
+      iter=iter.snake;
+    }
+  }
 
   extendTail() {
     if (this.snake == null) {
@@ -139,6 +149,15 @@ function keyPressed() {
   }
 }
 
-function restartGame() {}
+function restartGame() {
+  score = 0;
+  playerSnake = new Snake();
+  currentApple = new Apple();
+  loop();
+}
 
-function gameOver() {}
+function gameOver() {
+  stroke(0);
+  text('GAME OVER', width/2, height/2);
+  noLoop();
+}
