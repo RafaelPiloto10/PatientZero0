@@ -16,7 +16,7 @@ function setup() {
   createCanvas(400, 400);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
-  rate = 12;
+  rate = 5;
   frameRate(rate);
   playerSnake = new Snake(null, null, null);
   currentApple = new Apple();
@@ -25,6 +25,7 @@ function setup() {
 }
 
 function draw() {
+  frameRate(rate);
   background(backgroundColor);
   // The snake performs the following four methods:
   playerSnake.moveSelf();
@@ -37,7 +38,10 @@ function draw() {
   displayScore();
 }
 
-function displayScore() {}
+function displayScore() 
+{
+  text("Current Score: "+score,10,10)
+}
 
 class Snake {
   constructor(x, y, dir) {
@@ -76,7 +80,7 @@ class Snake {
 
   showSelf() {
     stroke(240, 100, 100);
-    noFill();
+    fill(240, 100, 100);
     rect(this.x, this.y, this.size, this.size);
     noStroke();
     if (this.snake != null) {
@@ -86,15 +90,18 @@ class Snake {
 
   checkApples() {
     if (collideRectRect(this.x,this.y,10,10,currentApple.x,currentApple.y,10,10)) {
+      score++;
       this.extendTail();
       currentApple.move(); //add another segment and move the apple
+      score +=1;
+      rate +=3;
     }
   }
 
   checkCollisions() {
     let iter=this.snake
     while(iter!=null){
-      if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)){
+      if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)||this.x>width||this.x<0||this.y>height||this.y<0){
         gameOver();
         break;
       }
