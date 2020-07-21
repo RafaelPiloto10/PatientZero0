@@ -9,10 +9,11 @@ frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOW
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-let backgroundColor, playerSnake, currentApple, score, rate, gameIsOver;
+let backgroundColor, playerSnake, currentApple, score, rate, gameIsOver, lives;
 
 function setup() {
   // Canvas & color settings
+  lives = 3;
   createCanvas(400, 400);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
@@ -36,6 +37,9 @@ function draw() {
   currentApple.showSelf();
   // We put the score in its own function for readability.
   displayScore();
+  if(lives == 0){
+    gameIsOver = true;
+  }
 }
 
 function displayScore() 
@@ -86,6 +90,9 @@ class Snake {
     if (this.snake != null) {
       this.snake.showSelf();
     }
+    if (this.y > 400 || this.y < 0 || this.x < 0 || this.x > 400){
+      lives -=1;
+    }
   }
 
   checkApples() {
@@ -93,17 +100,21 @@ class Snake {
       score++;
       this.extendTail();
       currentApple.move(); //add another segment and move the apple
-      score +=1;
-      rate +=3;
+      rate=5+Math.pow(score,.9)
+      //if(rate < 15, 
     }
   }
 
   checkCollisions() {
     let iter=this.snake
+    if(this.x>width-10||this.x<0||this.y>height-10||this.y<0){
+      gameOver();
+      return;
+    }
     while(iter!=null){
-      if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)||this.x>width||this.x<0||this.y>height||this.y<0){
+      if(collideRectRect(this.x,this.y,9,9,iter.x,iter.y,9,9)){
         gameOver();
-        break;
+        return;
       }
       iter=iter.snake;
     }
@@ -126,8 +137,8 @@ class Snake {
 
 class Apple {
   constructor() {
-    this.x = random(width);
-    this.y = random(height);
+    this.x = random(width-30);
+    this.y = random(height-30);
     this.color = color(0, 80, 80);
   }
 
