@@ -1,6 +1,6 @@
 /* global createCanvas, colorMode, HSB, background, ellipse, rect, text, 
 mouseX, mouseY, round, sqrt, backgroundColor, color, random, width, height
-frameRate, stroke, noFill, noStroke, keyCode,fill, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
+frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
 */
 
 // Since this example code uses the p5 collide2d library, be sure to remind
@@ -71,6 +71,10 @@ class Snake {
   }
 
   checkApples() {
+    if (collideRectRect(this.x,this.y,10,10,currentApple.x,currentApple.y,10,10)){
+      this.extendTail()
+        
+    }
   }
 
   checkCollisions() {
@@ -95,6 +99,10 @@ class Apple {
   showSelf() {
     fill(this.color);
     rect(this.x,this.y,10)
+  }
+  move(){
+    this.x=random(width);
+    this.y=random(height);
   }
 }
 
