@@ -44,7 +44,9 @@ class Snake {
     this.y = height - 10;
     this.direction = 'N';
     this.speed = 12;
+    this.snake=null;
   }
+  
 
   moveSelf() {
     if (this.direction === "N") {
@@ -67,11 +69,25 @@ class Snake {
     noStroke();
   }
 
-  checkApples() {}
+  checkApples() {
+    
+    
+  }
 
-  checkCollisions() {}
+  checkCollisions() {
+    if(this.x<width||this.y<height||this.x>0||this.y<0)
+      return true;
+    if(this.snake!=null)
+      return this.snake.checkCollisions();
+    return false;
+  }
 
-  extendTail() {}
+  extendTail() {
+    if(this.snake==null)
+      this.snake=new Snake();
+    else
+      this.snake.extendTail();
+  }
 }
 
 class Apple {
