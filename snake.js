@@ -1,6 +1,6 @@
 /* global createCanvas, colorMode, HSB, background, ellipse, rect, text, 
 mouseX, mouseY, round, sqrt, backgroundColor, color, random, width, height
-frameRate, stroke, noFill, noStroke, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
+frameRate, stroke, noFill, noStroke, keyCode,fill, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW
 */
 
 // Since this example code uses the p5 collide2d library, be sure to remind
@@ -9,14 +9,15 @@ frameRate, stroke, noFill, noStroke, keyCode, UP_ARROW, DOWN_ARROW, LEFT_ARROW, 
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-let backgroundColor, playerSnake, currentApple, score
+let backgroundColor, playerSnake, currentApple, score, rate
 
 function setup() {
   // Canvas & color settings
   createCanvas(400, 400);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
-  frameRate(12);
+  rate=12;
+  frameRate(rate);
   playerSnake = new Snake();
   currentApple = new Apple();
   score = 0;
@@ -70,16 +71,10 @@ class Snake {
   }
 
   checkApples() {
-    
-    
   }
 
   checkCollisions() {
-    if(this.x<width||this.y<height||this.x>0||this.y<0)
-      return true;
-    if(this.snake!=null)
-      return this.snake.checkCollisions();
-    return false;
+    
   }
 
   extendTail() {
@@ -91,9 +86,16 @@ class Snake {
 }
 
 class Apple {
-  constructor() {}
+  constructor() {
+    this.x=random(width);
+    this.y=random(height);
+    this.color=color(0,80,80)
+  }
 
-  showSelf() {}
+  showSelf() {
+    fill(this.color);
+    rect(this.x,this.y,10)
+  }
 }
 
 function keyPressed() {
