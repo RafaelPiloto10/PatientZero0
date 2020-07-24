@@ -9,10 +9,9 @@ frameRate, stroke, noFill, noStroke, keyCode,fill,collideRectRect, UP_ARROW, DOW
 // (as a last resort) by pasting it in its entirety in this script as the first
 // line.
 
-let backgroundColor, playerSnake, currentApple, score, rate, gameIsOver, lives;
 
 function setup() {
-  // Canvas & color settings
+  // Canvas & color settin
 }
 
 function draw() {

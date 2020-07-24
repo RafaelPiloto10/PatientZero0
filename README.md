@@ -1,2 +1,3 @@
-Welcome to CSSI 
-====================
+# Patient Zero
+
+Diego & Rafael
