@@ -1,6 +1,7 @@
 /* global 
 */
 
+let population, infected, dead;
 
 function setup() {
   // Canvas & color settin
@@ -12,18 +13,12 @@ function draw() {
 
 
 
-class Region{
-  constructor()
-  {
+class Country{
+  constructor() {
     
   }
 }
 
-class Citizen{
-  constructor(){
-    
-  }
-}
 
 class Map{
   constructor(){
