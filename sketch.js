@@ -1,6 +1,12 @@
-/* global
- */
+/* global */
 
-function setup() {}
+let game;
+
+function setup() {
+  game = new Game();
+  game.load_state_data("2019PopulationEstimate.csv").then(() => {
+
+  });
+}
 
 function draw() {}
