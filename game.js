@@ -27,9 +27,8 @@ class Game {
 
       for (let i = 0; i < this.num_states; i++) {
         this.states.push({
-          name: this.state_population[i].NAME,
-          population: this.state_population[i + 1].POPESTIMATE2019,
-          coords: this.state_coordinates[i]
+          ...this.state_coordinates[i],
+          population: this.state_population[i + 1].POPESTIMATE2019
         });
       }
       this.hasDataLoaded = true;

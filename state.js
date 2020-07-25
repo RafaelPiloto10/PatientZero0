@@ -14,6 +14,7 @@ class State {
     @param pop_density (float) - the population density of the state
     @param revenue (float) - the amount of money the state contributes in revenue towards the country
     @param state_init_ppe (int)- the amount of PPE the state will be receiving at the start of the simulation
+  
   */
   constructor(lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe) {
     this.coords = createVector(lon, lat);
