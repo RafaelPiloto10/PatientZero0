@@ -15,4 +15,4 @@
 ## Resources:
 
 - [Wired - How Fast Does a Virus Spread?](https://www.wired.com/story/how-fast-does-a-virus-spread/)
-- [State population data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/)
+- Population data gathered from the 2019 Census: [State population data](https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/state/detail/)
