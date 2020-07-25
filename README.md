@@ -16,3 +16,4 @@
 
 - [Wired - How Fast Does a Virus Spread?](https://www.wired.com/story/how-fast-does-a-virus-spread/)
 - Population estimate gathered from 2020 Census estimates: [State estimate population data](https://worldpopulationreview.com/state-rankings/state-densities)
+- [State latitude and longitude data](https://gist.github.com/meiqimichelle/7727723)
