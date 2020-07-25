@@ -2,6 +2,8 @@
 
 # TODO:
 
+- (7/25) Create JSON File with state information that should not be random (ie. latitude & longitude, population? etc)
+
 # Known Bugs:
 
 # Update log:
