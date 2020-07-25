@@ -43,27 +43,30 @@ class Country {
   */
   populate_states() {
     for (let i = 0; i < this.num_states; i++) {
+      
       // ---------------------- TODO: Need to create JSON file with state information ---------------------------------------
       // this.states.push(new State(lat, lon, id, population, pop_density, revenue, state_init_ppe));
     }
   }
-  
+
   /*
     Creates patient zer0s based on the intial amount of citizens infected
     
     @return Whether or not the operation was completed successfully
   */
   patient_zero() {
-    if(this.init_infected == 0){
-      console.error("Trying to initialize 0 patient zer0s. Game cannot be played!!");
+    if (this.init_infected == 0) {
+      console.error(
+        "Trying to initialize 0 patient zer0s. Game cannot be played!!"
+      );
       return false;
     }
-    
+
     for (let i = 0; i < this.init_infected; i++) {
       let random_state = random(this.states);
       random_state.infect();
     }
-    
+
     return true;
   }
 }
