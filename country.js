@@ -14,15 +14,10 @@ class Country {
     @param init_infected (int) - the starting amount of people infected at the beginning of the game
     
   */
-  constructor(
-    num_states,
-    init_funds,
-    init_ppe,
-    init_spread_rate,
-    init_infected
-  ) {
-    this.num_states = num_states;
-    this.states = [];
+  constructor(states, init_funds, init_ppe, init_spread_rate, init_infected) {
+    this.states = states;
+    this.num_states = this.states.length;
+
     this.funds = init_funds;
     this.ppe = init_ppe;
 
@@ -34,19 +29,6 @@ class Country {
 
     this.populate_states();
     this.patient_zero();
-  }
-
-  /*
-    Populate the states with random/seeded configurations
-    
-    @return None
-  */
-  populate_states() {
-    for (let i = 0; i < this.num_states; i++) {
-      
-      // ---------------------- TODO: Need to create JSON file with state information ---------------------------------------
-      // this.states.push(new State(lat, lon, id, population, pop_density, revenue, state_init_ppe));
-    }
   }
 
   /*
