@@ -1,3 +1,6 @@
 class Game {
-  constructor() {}
+  constructor() {
+    this.state_data = 
+    
+  }
 }
