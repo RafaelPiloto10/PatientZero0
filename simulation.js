@@ -39,7 +39,8 @@ class Simulation {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
     console.log(Simulation.date.toDateString(), this.country.statistics.total_infected);
     Simulation.date.setDate(Simulation.date.getDate() + 1);
-    this.country.step(Simulation.date);
+    this.date = Simulation.date;
+    this.country.step();
   }
 
   /*

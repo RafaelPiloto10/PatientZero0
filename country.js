@@ -32,14 +32,14 @@ class Country {
     this.patient_zero();
   }
 
-  step(date) {
+  step() {
     // Update statistics
     let infected = 0;
     let recovered = 0;
     let dead = 0;
 
     for (let state of this.states) {
-      state.step(date);
+      state.step();
       infected += state.state_infected;
       recovered += state.state_recovered;
       dead += state.state_deaths;

@@ -70,21 +70,24 @@ class State {
     return true;
   }
 
-  step(current_date) {
+  step() {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
+    let current_date = Simulation.date;
+    
     this.update_infection_stack(current_date);
+    
+    console.log(current_date, Simulation.start_date);
     let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
-
+    console.log("Change in days: " + delta_time_in_days);
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
     let predicted_cases =
       Math.floor(Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe);
 
     let predicted_new_cases = predicted_cases - this.state_infected;
-    console.log(predicted_new_cases);
 
-    this.infect(predicted_new_cases);
+    this.infect(predicted_new_cases, current_date);
 
     this.prob_person_has_covid = this.state_infected / this.population;
   }

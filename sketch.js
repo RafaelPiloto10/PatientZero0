@@ -1,7 +1,7 @@
 /* global Simulation, createCanvas, background, frameCount */
 
 let simulation;
-let tot_num_of_states = 10;
+let tot_num_of_states = 2;
 
 function setup() {
   createCanvas(600, 600);
