@@ -23,32 +23,30 @@ class Simulation {
     // states, init_funds, init_ppe, init_spread_rate, init_infected
     // this.country = new Country(this.states.slice(0, num_states), )
   }
-  
+
   /*
     Step a day in the simulation
-    
   */
   step() {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
     this.date.setDate(this.date.getDate() + 1);
     console.log(this.date.toDateString());
   }
-  
-  
+
   /*
     Update function - called every frame
     Checks if the game should step a day and handles draw calls
   */
   update() {
-    if(frameCount % this.time_step == 0 && !this.paused) {
+    if (frameCount % this.time_step == 0 && !this.paused) {
       this.step();
     }
   }
-  
+
   /*
     Toggle whether or not the step function has been paused
     
-    @param set - If you want to set the paused variable to something, use that - otherwise, it
+    @param set - If you want to set the paused variable to something, use that - otherwise, it'll auto toggle
   */
   togglePause(set = null) {
     this.paused = set == null ? !this.paused : set;
