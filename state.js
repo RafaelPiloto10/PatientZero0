@@ -77,9 +77,7 @@ class State {
     
     this.update_infection_stack(current_date);
     
-    console.log(current_date, Simulation.start_date);
     let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
-    console.log("Change in days: " + delta_time_in_days);
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
     let predicted_cases =
