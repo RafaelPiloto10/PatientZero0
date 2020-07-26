@@ -29,6 +29,9 @@ class State {
     this.revenue = revenue
     this.state_ppe = state_init_ppe;
     this.spread_rate = spread_rate;
+    
+    this.has_patient_zero = false;
+    this.infection_stack = [];
   }
   
   /*
@@ -38,13 +41,20 @@ class State {
     
     @return boolean - TRUE: the infection was carried successfully/FALSE: the infection overflowed past the alltoed population
   */
-  infect(infected_amount = 1){
-    this.state_infected += infected_amount;
-    if(this.state_infected > this.population){
-      this.state_infected = this.population;
-      console.error(`State: ${this.id}: overflow in infections - constrained to population!`);
-      return false;
-    }
+  infect(infected_amount = 1, date) {
+    this.has_patient_zero = true;
+    
+    for(let i = 0; i < infected_amount; i++){
+      
+      this.state_infected += 1;
+      this.infection_stack.push(date);
+      
+      if(this.state_infected > this.population){
+        this.state_infected = this.population;
+        console.error(`State: ${this.id}: overflow in infections - constrained to population!`);
+        return false;
+      }
+    }    
     
     return true;
   }
@@ -59,7 +69,7 @@ class State {
     let delta_time_in_days = delta_time_since_day_one / (1000 * 3600 * 24);
     
     // Predict the number of cases using an exponential function
-    let predicted_cases = this.state_infected * Math.exp(this.spread_rate * delta_time_in_days);
-    
+    let predicted_cases = Math.exp(this.spread_rate * delta_time_in_days)/this.state_ppe;
+    this.infect(predicted_cases)
   }
 }
