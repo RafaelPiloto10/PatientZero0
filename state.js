@@ -59,6 +59,7 @@ class State {
     let delta_time_in_days = delta_time_since_day_one / (1000 * 3600 * 24);
     
     // Predict the number of cases using an exponential function
-    let predicted_cases = this.state_infected 
+    let predicted_cases = this.state_infected * Math.exp(this.spread_rate * delta_time_in_days);
+    
   }
 }
