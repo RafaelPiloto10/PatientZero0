@@ -78,14 +78,14 @@ class State {
     this.update_infection_stack(current_date);
     let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
 
-    // Predict the number of cases using an exponential function
+    // Predict the number of cases using an exponential function ---
+    // The predicted number of cases as a function of time
     let predicted_cases =
       Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe;
     
-    let predicted_new_cases = predicted_cases - this.infected;
+    let predicted_new_cases = predicted_cases - this.state_infected;
     
     this.infect(predicted_new_cases);
-
 
     this.prob_person_has_covid = this.state_infected / this.population;
   }
@@ -95,7 +95,7 @@ class State {
     let recovered = 0;
 
     this.infection_stack = this.infection_stack.filter(infection => {
-      let r = random();
+      let r = random(1000)/1000;
       if (getNumberDays(date, infection) > Simulation.recovery_time) {
         if (r < Simulation.mortality_rate) deaths += 1;
         else recovered += 1;
@@ -106,7 +106,7 @@ class State {
 
     this.state_deaths += deaths;
     this.state_recovered += recovered;
-    this.infected = this.infected - deaths - recovered;
+    this.state_infected = this.state_infected - deaths - recovered;
   }
 }
 

@@ -28,7 +28,8 @@ class Simulation {
     this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
-    this.country = new Country(this.states.slice(0, num_states), this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
+    
+    this.country = new Country(this.createStates(), this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
   }
 
   /*
@@ -57,5 +58,15 @@ class Simulation {
   */
   togglePause(set = null) {
     this.paused = set == null ? !this.paused : set;
+  }
+  
+  createStates() {
+    let states = [];
+    
+    for(let i = 0; i < this.num_states; i++) {
+      // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
+      let state = state_data[i];
+      states.push(new State(state.longitude, state.latitude, state.State, state.population))
+    }
   }
 }

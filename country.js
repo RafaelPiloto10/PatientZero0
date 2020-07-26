@@ -28,24 +28,23 @@ class Country {
       recovered: 0,
       spread_rate: init_spread_rate
     };
-    
-    this.populate_states();
+
     this.patient_zero();
   }
-  
-  step() {
+
+  step(date) {
     // Update statistics
     let infected = 0;
     let recovered = 0;
     let dead = 0;
-    
-    for(let state of this.states) {
-      state.step();
+
+    for (let state of this.states) {
+      state.step(date);
       infected += state.state_infected;
       recovered += state.state_recovered;
       dead += state.state_deaths;
     }
-    
+
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;
@@ -71,7 +70,7 @@ class Country {
 
     return true;
   }
-  
+
   /*
     Simulate travel between states and they're impact based on elementary COVID probabilties
     NOTE: This simulation assumes air travel on airlines that follow CDC measures and social distance
@@ -83,29 +82,28 @@ class Country {
     //   - https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close
     // How many people fly per day
     //   - https://www.cnn.com/travel/article/flight-capacity-united-states-coronavirus/index.html
-    
+
     let daily_flights = 482; // Elementary estimate from the CNN article
-    
+
     let amt_passangers_at_risk = 11; // Elemetary estiamte from the National Geographic article
-    
+
     let prob_contracting_covid = 0.2; // Elementary probability from the National Geographic article
-    
-    for(let i = 0; i < daily_flights; i++){
+
+    for (let i = 0; i < daily_flights; i++) {
       let departureState = random(this.states);
       let arrivalState = random(this.states);
-      
-      // randomly check if someone on a plane has COVID based on the probability that a person has COVID in the departure state 
-      let r = random(); 
-      if(r < departureState.prob_person_has_covid) {
-        for(let j = 0; j < amt_passangers_at_risk; j++) {
+
+      // randomly check if someone on a plane has COVID based on the probability that a person has COVID in the departure state
+      let r = random();
+      if (r < departureState.prob_person_has_covid) {
+        for (let j = 0; j < amt_passangers_at_risk; j++) {
           // Randomly spread the virus based on virus spread in the National Geographic article
           let r2 = random();
-          if(r2 > prob_contracting_covid) {
+          if (r2 > prob_contracting_covid) {
             arrivalState.infect(1, date);
           }
         }
       }
     }
-  
   }
 }
