@@ -1,6 +1,8 @@
 /* global state_data, frameCount */
 
 class Simulation {
+  
+  
   /* 
     Constructor for the Simulation class
     
@@ -8,6 +10,9 @@ class Simulation {
     
   */
   constructor(num_states) {
+    // Static field for start date
+    Simulation.start_date = new Date("21 January 2020");
+    
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
@@ -16,9 +21,9 @@ class Simulation {
     this.start_spread_rate = null; // The spread rate of the virus at the start of the game
     this.num_patient_zeros = null; // How many people are infected at the start of the game
 
-    this.date = new Date("21 January 2020");
+    this.date = Simulation.start_date;
     this.time_step = 50; // 5 frames per day - ie. For every 5 frames, it is a new day
-    this.paused = false;
+    this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
     // this.country = new Country(this.states.slice(0, num_states), )
@@ -30,7 +35,6 @@ class Simulation {
   step() {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
     this.date.setDate(this.date.getDate() + 1);
-    console.log(this.date.toDateString());
   }
 
   /*

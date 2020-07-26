@@ -1,4 +1,4 @@
-/* global createVector */
+/* global createVector, Simulation*/
 
 /*
   State class meant to simulate an individual state with unique state properties
@@ -16,7 +16,7 @@ class State {
     @param state_init_ppe (int)- the amount of PPE the state will be receiving at the start of the simulation
   
   */
-  constructor(lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe) {
+  constructor(lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate) {
     this.coords = createVector(lon, lat);
     this.id = id;
     this.population = pop;
@@ -28,6 +28,7 @@ class State {
     
     this.revenue = revenue
     this.state_ppe = state_init_ppe;
+    this.spread_rate = spread_rate;
   }
   
   /*
@@ -46,5 +47,18 @@ class State {
     }
     
     return true;
+  }
+  
+  step(current_date) {
+    // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
+    // https://www.wired.com/story/how-fast-does-a-virus-spread/
+    
+    // To calculate the time difference of two dates
+    let delta_time_since_day_one = current_date.getTime() - Simulation.start_date.getTime(); 
+    // To calculate the no. of days between two dates 
+    let delta_time_in_days = delta_time_since_day_one / (1000 * 3600 * 24);
+    
+    // Predict the number of cases using an exponential function
+    let predicted_cases = this.state_infected 
   }
 }
