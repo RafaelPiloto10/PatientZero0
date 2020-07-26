@@ -39,7 +39,7 @@ class Country {
   patient_zero() {
     if (this.init_infected == 0) {
       console.error(
-        "Trying to initialize 0 patient zer0s. Game cannot be played!!"
+        "Trying to initialize 0 patient zer0s. Simulation cannot be played!!"
       );
       return false;
     }
@@ -50,5 +50,14 @@ class Country {
     }
 
     return true;
+  }
+  
+  random_travel() {
+    // Probability of contracting COVID-19 on a plane
+    //   - https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close
+    // How many people fly per day
+    //   - https://www.cnn.com/travel/article/flight-capacity-united-states-coronavirus/index.html
+    
+  
   }
 }

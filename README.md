@@ -5,12 +5,12 @@
 - Rafael
   - (7/25) Find state economic contribution to US healthcare
   - (7/25) Find more resources/papers to further simulation accuracy
-  - (7/25) Implement game time simulation
 
 ## Known Bugs:
 
 ## Update log:
 
+- (7/26) Implemented time simulation & started simulating virus spread model - Rafael
 - (7/25) Created state data and gathered resources for further review - Rafael
 - (7/25) Populated the state & country class with extensive comments and documentation. Updated TODO list & added Resources section in README.md - Rafael
 - (7/24) Split classes into separate files to follow OOP practices. Created Game & State class (check index.html for short description). - Rafael
