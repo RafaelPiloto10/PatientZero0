@@ -1,4 +1,4 @@
-/* global state_data, frameCount, Country */
+/* global state_data, frameCount, Country, State*/
 
 class Simulation {
   
@@ -21,10 +21,10 @@ class Simulation {
     this.start_funds = 2.5 * 1000000000000; // Starting funds
     this.start_ppe = null; // How much PPE is available at the start of the game
     this.start_spread_rate = null; // The spread rate of the virus at the start of the game
-    this.num_patient_zeros = null; // How many people are infected at the start of the game
+    this.num_patient_zeros = 1; // How many people are infected at the start of the game
 
     Simulation.date = Simulation.start_date;
-    this.time_step = 50; // 5 frames per day - ie. For every 5 frames, it is a new day
+    this.time_step = 300; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
@@ -60,13 +60,19 @@ class Simulation {
     this.paused = set == null ? !this.paused : set;
   }
   
+  /*
+    Create the states based on their data
+    
+    @return A new array with the State data
+  */
   createStates() {
     let states = [];
     
     for(let i = 0; i < this.num_states; i++) {
       // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
       let state = state_data[i];
-      states.push(new State(state.longitude, state.latitude, state.State, state.population))
+      states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, 1, 1, 1));
     }
+    return states;
   }
 }

@@ -56,17 +56,15 @@ class State {
   infect(infected_amount = 1, date = Simulation.start_date) {
     this.has_patient_zero = true;
 
-    for (let i = 0; i < infected_amount; i++) {
-      this.state_infected += 1;
-      this.infection_stack.push(date);
+    this.state_infected += infected_amount;
+    this.infection_stack.push({infected_amount, date});
 
-      if (this.state_infected > this.population) {
-        this.state_infected = this.population;
-        console.error(
-          `State: ${this.id}: overflow in infections - constrained to population!`
-        );
-        return false;
-      }
+    if (this.state_infected > this.population) {
+      this.state_infected = this.population;
+      console.error(
+        `State: ${this.id}: overflow in infections - constrained to population!`
+      );
+      return false;
     }
 
     return true;
@@ -82,9 +80,9 @@ class State {
     // The predicted number of cases as a function of time
     let predicted_cases =
       Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe;
-    
+
     let predicted_new_cases = predicted_cases - this.state_infected;
-    
+
     this.infect(predicted_new_cases);
 
     this.prob_person_has_covid = this.state_infected / this.population;
@@ -95,8 +93,8 @@ class State {
     let recovered = 0;
 
     this.infection_stack = this.infection_stack.filter(infection => {
-      let r = random(1000)/1000;
-      if (getNumberDays(date, infection) > Simulation.recovery_time) {
+      let r = random(1000) / 1000;
+      if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
         if (r < Simulation.mortality_rate) deaths += 1;
         else recovered += 1;
         return false;
@@ -112,7 +110,7 @@ class State {
 
 function getNumberDays(future, past) {
   // To calculate the time difference of two dates
-  let delta_time_since_day_one = future.getTime() - past.start_date.getTime();
+  let delta_time_since_day_one = future.getTime() - past.getTime();
   // To calculate the no. of days between two dates
   return delta_time_since_day_one / (1000 * 3600 * 24);
 }
