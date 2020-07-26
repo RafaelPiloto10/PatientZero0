@@ -32,6 +32,8 @@ class State {
     
     this.has_patient_zero = false;
     this.infection_stack = [];
+    
+    this.prob_person_has_covid = this.state_infected / this.population;
   }
   
   /*
@@ -70,6 +72,11 @@ class State {
     
     // Predict the number of cases using an exponential function
     let predicted_cases = Math.exp(this.spread_rate * delta_time_in_days)/this.state_ppe;
-    this.infect(predicted_cases)
+    this.infect(predicted_cases);
+    
+    // TODO: Update recoveries & deaths
+    
+    this.prob_person_has_covid = this.state_infected / this.population;
+
   }
 }
