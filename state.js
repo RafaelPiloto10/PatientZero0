@@ -16,7 +16,17 @@ class State {
     @param state_init_ppe (int)- the amount of PPE the state will be receiving at the start of the simulation
   
   */
-  constructor(lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate) {
+  constructor(
+    lon,
+    lat,
+    id,
+    pop,
+    pop_density,
+    state_init_infected,
+    revenue,
+    state_init_ppe,
+    spread_rate
+  ) {
     this.coords = createVector(lon, lat);
     this.id = id;
     this.population = pop;
@@ -25,17 +35,17 @@ class State {
     this.state_deaths = 0;
     this.state_infected = state_init_infected;
     this.state_recovered = 0;
-    
-    this.revenue = revenue
+
+    this.revenue = revenue;
     this.state_ppe = state_init_ppe;
     this.spread_rate = spread_rate;
-    
+
     this.has_patient_zero = false;
     this.infection_stack = [];
-    
+
     this.prob_person_has_covid = this.state_infected / this.population;
   }
-  
+
   /*
     Infects a given amount of people within the population
     
@@ -45,54 +55,64 @@ class State {
   */
   infect(infected_amount = 1, date = Simulation.start_date) {
     this.has_patient_zero = true;
-    
-    for(let i = 0; i < infected_amount; i++){
-      
+
+    for (let i = 0; i < infected_amount; i++) {
       this.state_infected += 1;
       this.infection_stack.push(date);
-      
-      if(this.state_infected > this.population){
+
+      if (this.state_infected > this.population) {
         this.state_infected = this.population;
-        console.error(`State: ${this.id}: overflow in infections - constrained to population!`);
+        console.error(
+          `State: ${this.id}: overflow in infections - constrained to population!`
+        );
         return false;
       }
-    }    
-    
+    }
+
     return true;
   }
-  
+
   step(current_date) {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
-    
+    this.update_infection_stack(current_date);
     let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
-    
+
     // Predict the number of cases using an exponential function
-    let predicted_cases = Math.exp(this.spread_rate * delta_time_in_days)/this.state_ppe;
-    this.infect(predicted_cases);
+    let predicted_cases =
+      Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe;
     
-    // TODO: Update recoveries & deaths
+    let predicted_new_cases = predicted_cases - this.infected;
     
+    this.infect(predicted_new_cases);
+
+
     this.prob_person_has_covid = this.state_infected / this.population;
   }
-  
-  /*
-    Filter function to update the infection stack
-  */
-  update_infection_stack(infection) {
+
+  update_infection_stack(date) {
+    let deaths = 0;
+    let recovered = 0;
+
+    this.infection_stack = this.infection_stack.filter(infection => {
       let r = random();
-      if(getNumberDays(Simulation.date, infection) > Simulation.recovery_time){
-        if(r < Simulation.mortality_rate) {
-          this.deaths 
-        }
-    }
+      if (getNumberDays(date, infection) > Simulation.recovery_time) {
+        if (r < Simulation.mortality_rate) deaths += 1;
+        else recovered += 1;
+        return false;
+      }
+      return true;
+    });
+
+    this.state_deaths += deaths;
+    this.state_recovered += recovered;
+    this.infected = this.infected - deaths - recovered;
   }
 }
 
 function getNumberDays(future, past) {
-    // To calculate the time difference of two dates
-    let delta_time_since_day_one = future.getTime() - past.start_date.getTime(); 
-    // To calculate the no. of days between two dates 
-    return delta_time_since_day_one / (1000 * 3600 * 24);
-    
+  // To calculate the time difference of two dates
+  let delta_time_since_day_one = future.getTime() - past.start_date.getTime();
+  // To calculate the no. of days between two dates
+  return delta_time_since_day_one / (1000 * 3600 * 24);
 }
