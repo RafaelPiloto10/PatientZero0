@@ -79,9 +79,10 @@ class State {
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
     let predicted_cases =
-      Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe;
+      Math.floor(Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe);
 
     let predicted_new_cases = predicted_cases - this.state_infected;
+    console.log(predicted_new_cases);
 
     this.infect(predicted_new_cases);
 
@@ -95,8 +96,8 @@ class State {
     this.infection_stack = this.infection_stack.filter(infection => {
       let r = random(1000) / 1000;
       if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
-        if (r < Simulation.mortality_rate) deaths += infection.infected;
-        else recovered += 1;
+        if (r < Simulation.mortality_rate) deaths += infection.infected_amount;
+        else recovered += infection.infected_amount;
         return false;
       }
       return true;

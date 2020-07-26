@@ -1,4 +1,4 @@
-/* global state_data, frameCount, Country, State*/
+/* global state_data, frameCount, Country, State, fill, text, width, height*/
 
 class Simulation {
   
@@ -75,5 +75,10 @@ class Simulation {
       states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, 1, 1, 0.2));
     }
     return states;
+  }
+  
+  debug(){
+    fill(255);
+    text(`Date: ${Simulation.date.toDateString()}, 1st State Infected: ${this.country.states[0].state_infected}`, 20, 20);
   }
 }
