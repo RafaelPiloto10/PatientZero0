@@ -1,4 +1,4 @@
-/* global random */
+/* global random, Simulation */
 
 /*
   The country class meant to represent the entire country the player is trying to save
@@ -21,14 +21,34 @@ class Country {
     this.funds = init_funds;
     this.ppe = init_ppe;
 
-    this.deaths = 0;
-    this.total_infected = init_infected;
-    this.init_infected = init_infected;
-    this.recovered = 0;
-    this.spread_rate = init_spread_rate;
-
+    this.statistics = {
+      deaths: 0,
+      total_infected: init_infected,
+      init_infected: init_infected,
+      recovered: 0,
+      spread_rate: init_spread_rate
+    };
+    
     this.populate_states();
     this.patient_zero();
+  }
+  
+  step() {
+    // Update statistics
+    let infected = 0;
+    let recovered = 0;
+    let dead = 0;
+    
+    for(let state of this.states) {
+      state.step();
+      infected += state.state_infected;
+      recovered += state.state_recovered;
+      dead += state.state_deaths;
+    }
+    
+    this.statistics.deaths = dead;
+    this.statistics.total_infected = infected;
+    this.statistics.recovered = recovered;
   }
 
   /*
@@ -58,7 +78,7 @@ class Country {
     do not spread the virus during travel! Only flights operating in full capacity where the probability
     of spreading the virus is higher. 
   */
-  simulate_random_travel() {
+  simulate_random_travel(date) {
     // Probability of contracting COVID-19 on a plane
     //   - https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close
     // How many people fly per day
@@ -81,7 +101,7 @@ class Country {
           // Randomly spread the virus based on virus spread in the National Geographic article
           let r2 = random();
           if(r2 > prob_contracting_covid) {
-            arrivalState.infect();
+            arrivalState.infect(1, date);
           }
         }
       }

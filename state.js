@@ -43,7 +43,7 @@ class State {
     
     @return boolean - TRUE: the infection was carried successfully/FALSE: the infection overflowed past the alltoed population
   */
-  infect(infected_amount = 1, date) {
+  infect(infected_amount = 1, date = Simulation.start_date) {
     this.has_patient_zero = true;
     
     for(let i = 0; i < infected_amount; i++){
@@ -77,6 +77,5 @@ class State {
     // TODO: Update recoveries & deaths
     
     this.prob_person_has_covid = this.state_infected / this.population;
-
   }
 }

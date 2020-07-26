@@ -1,4 +1,4 @@
-/* global state_data, frameCount */
+/* global state_data, frameCount, Country */
 
 class Simulation {
   
@@ -26,7 +26,7 @@ class Simulation {
     this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
-    // this.country = new Country(this.states.slice(0, num_states), )
+    this.country = new Country(this.states.slice(0, num_states), this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
   }
 
   /*
@@ -35,6 +35,7 @@ class Simulation {
   step() {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
     this.date.setDate(this.date.getDate() + 1);
+    this.country.step(this.date);
   }
 
   /*
