@@ -52,6 +52,12 @@ class Country {
     return true;
   }
   
+  /*
+    Simulate travel between states and they're impact based on elementary COVID probabilties
+    NOTE: This simulation assumes air travel on airlines that follow CDC measures and social distance
+    do not spread the virus during travel! Only flights operating in full capacity where the probability
+    of spreading the virus is higher. 
+  */
   simulate_random_travel() {
     // Probability of contracting COVID-19 on a plane
     //   - https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close
@@ -59,24 +65,23 @@ class Country {
     //   - https://www.cnn.com/travel/article/flight-capacity-united-states-coronavirus/index.html
     
     let daily_flights = 482; // Elementary estimate from the CNN article
-    let daily_passengers = 5670; // Elementary estimate from the CNN article
     
     let amt_passangers_at_risk = 11; // Elemetary estiamte from the National Geographic article
     
-    let prob_contracting_covid = 0.2; // Elementary probability
+    let prob_contracting_covid = 0.2; // Elementary probability from the National Geographic article
     
     for(let i = 0; i < daily_flights; i++){
       let departureState = random(this.states);
-      let arrival = random(this.states);
+      let arrivalState = random(this.states);
       
       // randomly check if someone on a plane has COVID based on the probability that a person has COVID in the departure state 
       let r = random(); 
-      if(r < departure.prob_person_has_covid) {
+      if(r < departureState.prob_person_has_covid) {
         for(let j = 0; j < amt_passangers_at_risk; j++) {
           // Randomly spread the virus based on virus spread in the National Geographic article
           let r2 = random();
           if(r2 > prob_contracting_covid) {
-            arrival.infect();
+            arrivalState.infect();
           }
         }
       }
