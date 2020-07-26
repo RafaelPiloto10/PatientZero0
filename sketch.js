@@ -1,10 +1,12 @@
-/* global */
+/* global Simulation */
 
-let game;
+let simulation;
 let tot_num_of_states = 50;
 
 function setup() {
-  // game = new Game("2019PopulationEstimate.csv", tot_num_of_states);
+  simulation = new Simulation(tot_num_of_states);
 }
 
-function draw() {}
+function draw() {
+  simulation.update();
+}
