@@ -9,5 +9,4 @@ function setup() {
 
 function draw() {
   simulation.update();
-  console.log(Simulation.date.toDateString(), simulation.country.statistics.total_infected);
 }

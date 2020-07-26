@@ -95,7 +95,7 @@ class State {
     this.infection_stack = this.infection_stack.filter(infection => {
       let r = random(1000) / 1000;
       if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
-        if (r < Simulation.mortality_rate) deaths += 1;
+        if (r < Simulation.mortality_rate) deaths += infection.infected;
         else recovered += 1;
         return false;
       }
