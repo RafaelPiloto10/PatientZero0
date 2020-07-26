@@ -1,4 +1,4 @@
-/* global createVector, Simulation*/
+/* global createVector, Simulation, random */
 
 /*
   State class meant to simulate an individual state with unique state properties
@@ -65,10 +65,7 @@ class State {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
     
-    // To calculate the time difference of two dates
-    let delta_time_since_day_one = current_date.getTime() - Simulation.start_date.getTime(); 
-    // To calculate the no. of days between two dates 
-    let delta_time_in_days = delta_time_since_day_one / (1000 * 3600 * 24);
+    let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
     
     // Predict the number of cases using an exponential function
     let predicted_cases = Math.exp(this.spread_rate * delta_time_in_days)/this.state_ppe;
@@ -78,4 +75,24 @@ class State {
     
     this.prob_person_has_covid = this.state_infected / this.population;
   }
+  
+  /*
+    Filter function to update the infection stack
+  */
+  update_infection_stack(infection) {
+      let r = random();
+      if(getNumberDays(Simulation.date, infection) > Simulation.recovery_time){
+        if(r < Simulation.mortality_rate) {
+          this.deaths 
+        }
+    }
+  }
+}
+
+function getNumberDays(future, past) {
+    // To calculate the time difference of two dates
+    let delta_time_since_day_one = future.getTime() - past.start_date.getTime(); 
+    // To calculate the no. of days between two dates 
+    return delta_time_since_day_one / (1000 * 3600 * 24);
+    
 }

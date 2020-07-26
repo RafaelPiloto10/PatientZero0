@@ -10,8 +10,10 @@ class Simulation {
     
   */
   constructor(num_states) {
-    // Static field for start date
-    Simulation.start_date = new Date("21 January 2020");
+    // Static field for simulation
+    Simulation.start_date = new Date("21 January 2020"); // Date of patient zer0
+    Simulation.mortality_rate = 0.035; // Avg. COVID 19 Mortality rate from WHO - https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200306-sitrep-46-covid-19.pdf?sfvrsn=96b04adf_4
+    Simulation.recovery_time = 14; // 14 days recovery time
     
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
@@ -21,7 +23,7 @@ class Simulation {
     this.start_spread_rate = null; // The spread rate of the virus at the start of the game
     this.num_patient_zeros = null; // How many people are infected at the start of the game
 
-    this.date = Simulation.start_date;
+    Simulation.date = Simulation.start_date;
     this.time_step = 50; // 5 frames per day - ie. For every 5 frames, it is a new day
     this.paused = false;    
 
@@ -34,8 +36,8 @@ class Simulation {
   */
   step() {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
-    this.date.setDate(this.date.getDate() + 1);
-    this.country.step(this.date);
+    Simulation.date.setDate(Simulation.date.getDate() + 1);
+    this.country.step(Simulation.date);
   }
 
   /*
