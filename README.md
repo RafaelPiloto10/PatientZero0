@@ -32,3 +32,4 @@
 - [Air Travel Data](https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close)
 - [How population density affects virus spread](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
 - [Modeling virus spread with population density](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
+- [Median Household income in US](https://www.investopedia.com/personal-finance/what-average-income-us/)

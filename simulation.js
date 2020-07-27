@@ -14,6 +14,8 @@ class Simulation {
     Simulation.start_date = new Date(start_date); // Date of patient zer0
     Simulation.mortality_rate = 0.035; // Avg. COVID 19 Mortality rate from WHO - https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200306-sitrep-46-covid-19.pdf?sfvrsn=96b04adf_4
     Simulation.recovery_time = 14; // 14 days recovery time
+    Simulation.healthcare_tax = 0.05; // Healthcare tax
+    Simulation.media
     
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population

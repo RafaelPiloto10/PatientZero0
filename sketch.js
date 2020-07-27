@@ -2,9 +2,10 @@
 
 let simulation;
 let tot_num_of_states = 2;
+let canvas;
 
 function setup() {
-  createCanvas(600, 600);
+  canvas = createCanvas(600, 600);
   simulation = new Simulation(tot_num_of_states, "21 January 2020");
 }
 
