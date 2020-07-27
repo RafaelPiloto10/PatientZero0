@@ -22,7 +22,7 @@ class Map {
     {
       let pos = myMap.latLngToPixel(simulation.country.states[i].coords.x,simulation.country.states[i].coords.y);
       //let size=
-      //let color =
+      fill(0, 100, 100, .2);
       circle(pos.x,pos.y,10)
     }
   }

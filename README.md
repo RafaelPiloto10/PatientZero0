@@ -14,7 +14,8 @@
 
 ## Change log:
 
-- (7/27) Implemented Mappa.js to load a map of the United States, with the ability to use the locatioinformation
+
+- (7/27) Implemented Mappa.js to load a map of the United States w/ the ability to use the location information - Diego
 - (7/26) Completed elementary virus spread simulation using an exponential function as the model w/ features of keeping track of how many people are infected/recovered/dead- Rafael
 - (7/26) Implemented time simulation & started simulating virus spread model - Rafael
 - (7/25) Created state data and gathered resources for further review - Rafael

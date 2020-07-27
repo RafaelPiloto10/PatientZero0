@@ -1,3 +1,6 @@
+const min_landArea = 61;
+const max_landArea = 570641;
+
 const state_data = [
   {
     State: "Alabama",
