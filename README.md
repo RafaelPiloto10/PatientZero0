@@ -24,7 +24,7 @@
 ## Resources:
 
 - [Wired - How Fast Does a Virus Spread?](https://www.wired.com/story/how-fast-does-a-virus-spread/)
-- Population estimate gathered from 2020 Census estimates: [State estimate population data](https://worldpopulationreview.com/state-rankings/state-densities)
+- [Population estimate gathered from 2020 Census estimates](https://worldpopulationreview.com/state-rankings/state-densities)
 - [State latitude and longitude data](https://gist.github.com/meiqimichelle/7727723)
 - [United States spending in Coronavirus](https://www.washingtonpost.com/business/2020/04/15/coronavirus-economy-6-trillion/)
 - [CDC PPE Burn Rate Research Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7225214/)
@@ -33,3 +33,4 @@
 - [How population density affects virus spread](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
 - [Modeling virus spread with population density](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
 - [Median Household income in US](https://www.investopedia.com/personal-finance/what-average-income-us/)
+- [5% of taxes are for healthcare related services](https://www.crfb.org/papers/american-health-care-health-spending-and-federal-budget)
