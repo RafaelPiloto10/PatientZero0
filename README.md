@@ -12,7 +12,7 @@
 
 - Need to optimize simulation & all nested child loops
 
-## Update log:
+## Change log:
 
 - (7/26) Completed elementary virus spread simulation using an exponential function as the model w/ features of keeping track of how many people are infected/recovered/dead- Rafael
 - (7/26) Implemented time simulation & started simulating virus spread model - Rafael
