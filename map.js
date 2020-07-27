@@ -1,5 +1,5 @@
 /*
-global Mappa, canvas, circle, state_data, simulation
+global Mappa, canvas, circle, state_data, simulation, fill
 */
 let myMap;
 const mappa = new Mappa('Leaflet');
@@ -21,8 +21,7 @@ class Map {
     for(let i=0;i<simulation.country.states.length;i++) //pulls the data of each state to draw a circle on its "current" location
     {
       let pos = myMap.latLngToPixel(simulation.country.states[i].coords.x,simulation.country.states[i].coords.y);
-      //let size=
-      fill(0, 100, 100, .2);
+      fill(0, 100.0*simulation.country.states[i].state_infected/simulation.country.states[i].population,100, .2);
       circle(pos.x,pos.y,10)
     }
   }
