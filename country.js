@@ -59,15 +59,15 @@ class Country {
     @return Whether or not the operation was completed successfully
   */
   patient_zero() {
-    if (this.init_infected == 0) {
+    if (this.statistics.init_infected == 0) {
       console.error(
         "Trying to initialize 0 patient zer0s. Simulation cannot be played!!"
       );
       return false;
     }
-
-    for (let i = 0; i < this.init_infected; i++) {
+    for (let i = 0; i < this.statistics.init_infected; i++) {
       let random_state = random(this.states);
+      console.log("Infected: " + this.states.id + " with patient zero");
       random_state.infect();
     }
 
