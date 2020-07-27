@@ -23,7 +23,9 @@ class Map {
     {
       let pos = myMap.latLngToPixel(simulation.country.states[i].coords.x,simulation.country.states[i].coords.y);
       let size = state_data[i].LandArea*Math.pow(myMap.zoom(),3)/200000;
-      fill(0,200.0*simulation.country.states[i].state_infected/simulation.country.states[i].population,100);
+      if(size<2*myMap.zoom())
+        size=2*myMap.zoom();
+      fill(0,200.0*simulation.country.states[i].state_infected/simulation.country.states[i].population,70);
       circle(pos.x,pos.y,size);
     }
   }
