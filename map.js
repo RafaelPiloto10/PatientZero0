@@ -18,10 +18,11 @@ class Map {
   
   drawCases()
   {
-    for(let i=0;i<simulation.country.states.length;i++)
+    for(let i=0;i<simulation.country.states.length;i++) //pulls the data of each state to draw a circle on its "current" location
     {
-      // simulation.country.states[i]
-      let pos = myMap.latLngToPixel(simulation.country.states[i].lat,simulation.country.states[i].lon);
+      let pos = myMap.latLngToPixel(simulation.country.states[i].coords.x,simulation.country.states[i].coords.y);
+      //let size=
+      //let color =
       circle(pos.x,pos.y,10)
     }
   }

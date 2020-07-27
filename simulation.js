@@ -71,14 +71,19 @@ class Simulation {
   */
   createStates() {
     let states = [];
+    let min = Infinity;
+    let max = 0;
     
     for(let i = 0; i < this.num_states; i++) {
       // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
       let state = state_data[i];
       let revenue = state.Pop * Simulation.healthcare_fund_per_person
       let init_ppe = 1;
+      if(state.LandArea < min) min = state.LandArea
+      if(state.LandArea > max) max = state.LandArea;
       states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, revenue, init_ppe, Simulation.spread_rate));
     }
+    console.log(min, max);
     return states;
   }
 
@@ -87,6 +92,6 @@ class Simulation {
   */
   debug(){
     fill(0);
-    text(`Date: ${Simulation.date.toDateString()}, Population Infected: ${this.country.statistics.total_infected}`, 20, 20);
+    text(`Date: ${Simulation.date.toDateString()}, Population Infected: ${this.country.statistics.total_infected}`, 20, height - 20);
   }
 }

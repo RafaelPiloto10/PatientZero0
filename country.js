@@ -67,7 +67,7 @@ class Country {
     }
     for (let i = 0; i < this.statistics.init_infected; i++) {
       let random_state = random(this.states);
-      console.log("Infected: " + this.states.id + " with patient zero");
+      console.log("Infected: " + random_state.id + " with patient zero");
       random_state.infect();
     }
 

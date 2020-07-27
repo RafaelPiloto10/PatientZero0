@@ -27,7 +27,7 @@ class State {
     state_init_ppe,
     spread_rate
   ) {
-    this.coords = createVector(lon, lat);
+    this.coords = createVector(lat, lon);
     this.id = id;
     this.population = pop;
     this.population_density = pop_density;
