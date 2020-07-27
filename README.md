@@ -5,11 +5,16 @@
 - Rafael
   - (7/25) Find state economic contribution to US healthcare
   - (7/25) Find more resources/papers to further simulation accuracy
+  - (7/26) Improve case prediction model
+  - (7/26) US PPE capacity
 
 ## Known Bugs:
 
+- Need to optimize simulation & all nested child loops
+
 ## Update log:
 
+- (7/26) Completed elementary virus spread simulation using an exponential function as the model w/ features of keeping track of how many people are infected/recovered/dead- Rafael
 - (7/26) Implemented time simulation & started simulating virus spread model - Rafael
 - (7/25) Created state data and gathered resources for further review - Rafael
 - (7/25) Populated the state & country class with extensive comments and documentation. Updated TODO list & added Resources section in README.md - Rafael
