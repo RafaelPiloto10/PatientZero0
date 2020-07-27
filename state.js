@@ -59,10 +59,10 @@ class State {
     this.state_infected += infected_amount;
     this.infection_stack.push({infected_amount, date});
 
-    if (this.state_infected > this.population) {
-      this.state_infected = this.population;
+    if (this.state_infected > this.population - this.state_recovered) {
+      this.state_infected = this.population - this.state_recovered;
       console.error(
-        `State: ${this.id}: overflow in infections - constrained to population!`
+        `State: ${this.id}: overflow in infections - constrained to population-recovered!`
       );
       return false;
     }
@@ -70,6 +70,9 @@ class State {
     return true;
   }
 
+  /*
+    Step through a new day for the state
+  */
   step() {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
@@ -89,7 +92,13 @@ class State {
 
     this.prob_person_has_covid = this.state_infected / this.population;
   }
-
+  
+  /*
+    Update the infection stack by checking if patients have recovered or died
+    
+    @param date - the current date in the simulation
+    
+  */
   update_infection_stack(date) {
     let deaths = 0;
     let recovered = 0;
@@ -112,7 +121,7 @@ class State {
 
 function getNumberDays(future, past) {
   // To calculate the time difference of two dates
-  let delta_time_since_day_one = future.getTime() - past.getTime();
+  let delta_time = future.getTime() - past.getTime();
   // To calculate the no. of days between two dates
-  return delta_time_since_day_one / (1000 * 3600 * 24);
+  return delta_time / (1000 * 3600 * 24);
 }

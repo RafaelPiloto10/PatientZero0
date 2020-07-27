@@ -30,3 +30,4 @@
 - [CDC PPE Burn Rate Research Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7225214/)
 - [Tracking Patient Zero in the USA](https://www.theguardian.com/world/2020/may/26/us-coronavirus-patient-zero-100000-deaths)
 - [Air Travel Data](https://www.nationalgeographic.com/science/2020/01/how-coronavirus-spreads-on-a-plane/#close)
+- [How population density affects virus spread](https://www.sciencedirect.com/science/article/pii/S0025556413001235)

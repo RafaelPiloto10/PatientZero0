@@ -75,7 +75,10 @@ class Simulation {
     }
     return states;
   }
-  
+
+  /*
+    Debug code to visualize the time and how many people are infected
+  */
   debug(){
     fill(255);
     text(`Date: ${Simulation.date.toDateString()}, Population Infected: ${this.country.statistics.total_infected}`, 20, 20);

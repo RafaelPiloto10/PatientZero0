@@ -31,7 +31,10 @@ class Country {
 
     this.patient_zero();
   }
-
+  
+  /*
+    Step through a new day for the country
+  */
   step() {
     // Update statistics
     let infected = 0;
