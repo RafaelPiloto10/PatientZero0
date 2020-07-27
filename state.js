@@ -54,8 +54,10 @@ class State {
     @return boolean - TRUE: the infection was carried successfully/FALSE: the infection overflowed past the alltoed population
   */
   infect(infected_amount = 1, date = Simulation.start_date) {
-    this.has_patient_zero = true;
-
+    if(this.state_infected <= 0 && infected_amount > 0){
+      this.patient_zero_date = date;
+    }
+    
     this.state_infected += infected_amount;
     this.infection_stack.push({ infected_amount, date });
 
@@ -75,13 +77,16 @@ class State {
   */
   step() {
     let current_date = Simulation.date;
+    if (this.state_infected > 0) { // Only if we have an infected citizen should the virus spread
+      this.update_infection_stack(current_date);
 
-    this.update_infection_stack(current_date);
+      let predicted_cases = this.get_predicted_cases_exponentially(
+        current_date
+      );
+      let predicted_new_cases = predicted_cases - this.state_infected;
 
-    let predicted_cases = this.get_predicted_cases_exponentially(current_date);
-    let predicted_new_cases = predicted_cases - this.state_infected;
-
-    this.infect(predicted_new_cases, current_date);
+      this.infect(predicted_new_cases, current_date);
+    }
 
     this.prob_person_has_covid = this.state_infected / this.population;
   }
@@ -122,7 +127,7 @@ class State {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
 
-    let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
+    let delta_time_in_days = getNumberDays(current_date, this.patient_zero_date);
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
     return Math.floor(

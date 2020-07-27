@@ -13,9 +13,11 @@ class Simulation {
     // Static field for simulation
     Simulation.start_date = new Date(start_date); // Date of patient zer0
     Simulation.mortality_rate = 0.035; // Avg. COVID 19 Mortality rate from WHO - https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200306-sitrep-46-covid-19.pdf?sfvrsn=96b04adf_4
+    Simulation.spread_rate = 0.288;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
-    Simulation.media
+    Simulation.median_household_income = 63179.00;
+    Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
     
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
@@ -73,7 +75,9 @@ class Simulation {
     for(let i = 0; i < this.num_states; i++) {
       // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
       let state = state_data[i];
-      states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, 1, 1, 0.2));
+      let revenue = state.Pop * Simulation.healthcare_fund_per_person
+      let init_ppe = 1;
+      states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, revenue, init_ppe, Simulation.spread_rate));
     }
     return states;
   }
