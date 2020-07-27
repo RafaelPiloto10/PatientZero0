@@ -57,7 +57,7 @@ class State {
     this.has_patient_zero = true;
 
     this.state_infected += infected_amount;
-    this.infection_stack.push({infected_amount, date});
+    this.infection_stack.push({ infected_amount, date });
 
     if (this.state_infected > this.population - this.state_recovered) {
       this.state_infected = this.population - this.state_recovered;
@@ -74,25 +74,18 @@ class State {
     Step through a new day for the state
   */
   step() {
-    // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
-    // https://www.wired.com/story/how-fast-does-a-virus-spread/
     let current_date = Simulation.date;
-    
-    this.update_infection_stack(current_date);
-    
-    let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
-    // Predict the number of cases using an exponential function ---
-    // The predicted number of cases as a function of time
-    let predicted_cases =
-      Math.floor(Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe);
 
+    this.update_infection_stack(current_date);
+
+    let predicted_cases = this.get_predicted_cases_exponentially(current_date);
     let predicted_new_cases = predicted_cases - this.state_infected;
 
     this.infect(predicted_new_cases, current_date);
 
     this.prob_person_has_covid = this.state_infected / this.population;
   }
-  
+
   /*
     Update the infection stack by checking if patients have recovered or died
     
@@ -116,6 +109,39 @@ class State {
     this.state_deaths += deaths;
     this.state_recovered += recovered;
     this.state_infected = this.state_infected - deaths - recovered;
+  }
+
+  /*
+    Predict the number of cases at time 'current_date' using an exponential model
+    
+    @param current_date - the current date in the simulation
+    
+    @return - the number of cases predicted at time=current_date
+  */
+  get_predicted_cases_exponentially(current_date) {
+    // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
+    // https://www.wired.com/story/how-fast-does-a-virus-spread/
+
+    let delta_time_in_days = getNumberDays(current_date, Simulation.start_date);
+    // Predict the number of cases using an exponential function ---
+    // The predicted number of cases as a function of time
+    return Math.floor(
+      Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe
+    );
+  }
+
+  /*
+    Predict the number of increased cases using the SIR model:
+    https://www.sciencedirect.com/science/article/pii/S0025556413001235
+    
+    @return - the number of new cases 
+  */
+  get_predicted_cases_SIR(current_date) {
+    // Using a SIR Model
+    // Rate of increase for infectious cases = dI/dt = BS(I/N)
+    // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
+    // R is the number of people recovered, and N is the population number
+    // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
   }
 }
 
