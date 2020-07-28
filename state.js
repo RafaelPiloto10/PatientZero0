@@ -105,17 +105,19 @@ class State {
   update_infection_stack(date) {
     let deaths = 0;
     let recovered = 0;
-
-    this.infection_stack = this.infection_stack.filter(infection => {
+    
+    for(let i = 0; i < this.infection_stack.length; i++){
+      let infection = this.infection_stack[i];
       let r = random(1000) / 1000;
-      if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
-        if (r < Simulation.mortality_rate) deaths += infection.infected_amount;
-        else recovered += infection.infected_amount;
-        return false;
+      if (r < Simulation.mortality_rate){
+        deaths += infection.infected_amount;
+        this.infection_stack.splice(i, 1);
+      } else if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
+        this.state_recovered += infection.infected_amount;
+        this.infection_stack.splice(i, 1);
       }
-      return true;
-    });
-
+    }
+    
     this.state_deaths += deaths;
     this.state_recovered += recovered;
     this.state_infected = this.state_infected - deaths - recovered;

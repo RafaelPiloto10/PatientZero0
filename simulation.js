@@ -86,6 +86,7 @@ class Simulation {
   */
   debug(){
     fill(0);
-    text(`Date: ${Simulation.date.toDateString()}, Population Infected: ${this.country.statistics.total_infected}`, 20, height - 20);
+    text(`Date: ${Simulation.date.toDateString()}`, 20, height - 40);
+    text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
   }
 }
