@@ -14,8 +14,8 @@
 
 ## Change log:
 
-
-- (7/27) Implemented circles for each state to react to how infected they are with COVID - Diego
+- (7/28) Implemented buttons outside the map that can be programmed to affect the simulation - Diego
+- (7/27) Implemented circles that follow the map position for each state to react to how infected they are with COVID - Diego
 - (7/27) Implemented Mappa.js to load a map of the United States w/ the ability to use the location information - Diego
 - (7/26) Completed elementary virus spread simulation using an exponential function as the model w/ features of keeping track of how many people are infected/recovered/dead- Rafael
 - (7/26) Implemented time simulation & started simulating virus spread model - Rafael

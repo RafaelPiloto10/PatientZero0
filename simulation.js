@@ -28,7 +28,7 @@ class Simulation {
     this.num_patient_zeros = 1; // How many people are infected at the start of the game
 
     Simulation.date = new Date(start_date);
-    this.time_step = 150; // frames per day - ie. For every N frames, it is a new day
+    this.time_step = 30 // 150; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected

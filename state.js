@@ -65,7 +65,6 @@ class State {
     
     this.state_infected += infected_amount;
     this.infection_stack.push({ infected_amount, date });
-
     if (this.state_infected > this.population - this.state_recovered - this.state_deaths) {
       this.state_infected = this.population - this.state_recovered - this.state_deaths;
       console.error(
@@ -82,7 +81,7 @@ class State {
   */
   step() {
     let current_date = Simulation.date;
-    if (this.state_infected > 0 && this.state_recovered + this.state_deaths >= this.population) { // Only if we have an infected citizen should the virus spread
+    if (this.state_infected > 0 && this.state_recovered + this.state_deaths <= this.population) { // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
 
       let predicted_cases = this.get_predicted_cases_exponentially(
@@ -108,19 +107,20 @@ class State {
     
     for(let i = 0; i < this.infection_stack.length; i++){
       let infection = this.infection_stack[i];
-      let r = random(1000) / 1000;
+      let r = random();
       if (r < Simulation.mortality_rate){
         deaths += infection.infected_amount;
         this.infection_stack.splice(i, 1);
-      } else if (getNumberDays(date, infection.date) > Simulation.recovery_time) {
-        this.state_recovered += infection.infected_amount;
+      } else if (getNumberDays(date, infection.date) >= Simulation.recovery_time) {
+        recovered += infection.infected_amount;
         this.infection_stack.splice(i, 1);
       }
     }
     
     this.state_deaths += deaths;
     this.state_recovered += recovered;
-    this.state_infected = this.state_infected - deaths - recovered;
+    console.log(recovered);
+    this.state_infected = Math.max(this.state_infected - deaths - recovered, 0);
   }
 
   /*
