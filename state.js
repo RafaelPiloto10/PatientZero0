@@ -35,7 +35,7 @@ class State {
     this.state_deaths = 0;
     this.state_infected = state_init_infected;
     this.state_recovered = 0;
-    
+
     this.revenue = revenue;
     this.state_ppe = state_init_ppe;
     this.spread_rate = spread_rate;
@@ -54,19 +54,25 @@ class State {
     @return boolean - TRUE: the infection was carried successfully/FALSE: the infection overflowed past the alltoed population
   */
   infect(infected_amount = 1, date = Simulation.start_date) {
-    if(this.state_infected <= 0 && infected_amount > 0){
+    if (this.state_infected <= 0 && infected_amount > 0) {
       this.patient_zero_date = date;
     }
-    
-    if(this.state_recovered + this.state_deaths >= this.population) {
-      console.log(`${this.id} cannot be infected. Population has developed antibodies.`);
+
+    if (this.state_recovered + this.state_deaths >= this.population) {
+      console.log(
+        `${this.id} cannot be infected. Population has developed antibodies.`
+      );
       return false;
-    } 
-    
+    }
+
     this.state_infected += infected_amount;
     this.infection_stack.push({ infected_amount, date });
-    if (this.state_infected > this.population - this.state_recovered - this.state_deaths) {
-      this.state_infected = this.population - this.state_recovered - this.state_deaths;
+    if (
+      this.state_infected >
+      this.population - this.state_recovered - this.state_deaths
+    ) {
+      this.state_infected =
+        this.population - this.state_recovered - this.state_deaths;
       console.error(
         `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
       );
@@ -81,7 +87,11 @@ class State {
   */
   step() {
     let current_date = Simulation.date;
-    if (this.state_infected > 0 && this.state_recovered + this.state_deaths <= this.population) { // Only if we have an infected citizen should the virus spread
+    if (
+      this.state_infected > 0 &&
+      this.state_recovered + this.state_deaths <= this.population
+    ) {
+      // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
 
       let predicted_cases = this.get_predicted_cases_exponentially(
@@ -105,18 +115,27 @@ class State {
     let deaths = 0;
     let recovered = 0;
     
-    for(let i = 0; i < this.infection_stack.length; i++){
+    for (let i = 0; i < this.infection_stack.length; i++) {
       let infection = this.infection_stack[i];
-      let r = random();
-      if (r < Simulation.mortality_rate){
-        deaths += infection.infected_amount;
+      if(infection.infected_amount <= 0){
         this.infection_stack.splice(i, 1);
-      } else if (getNumberDays(date, infection.date) >= Simulation.recovery_time) {
+        continue;
+      }
+      let d = getNumberDays(Simulation.date, infection.date);
+      if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
         this.infection_stack.splice(i, 1);
+      } else {
+        for (let j = 0; j < infection.infected_amount; j++) {
+          let r = random();
+          if (r < Simulation.mortality_rate) {
+            deaths += 1;
+            infection.infected_amount -= 1;
+          }
+        }
       }
     }
-    
+
     this.state_deaths += deaths;
     this.state_recovered += recovered;
     console.log(recovered);
@@ -134,7 +153,10 @@ class State {
     // At the early stages of the pandemic, the increase in cases can be modeled by an exponential function
     // https://www.wired.com/story/how-fast-does-a-virus-spread/
 
-    let delta_time_in_days = getNumberDays(current_date, this.patient_zero_date);
+    let delta_time_in_days = getNumberDays(
+      current_date,
+      this.patient_zero_date
+    );
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
     return Math.floor(
@@ -154,9 +176,6 @@ class State {
     // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
     // R is the number of people recovered, and N is the population number
     // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
-    
-    
-  
   }
 }
 
