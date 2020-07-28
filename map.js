@@ -34,7 +34,7 @@ class Map {
         (200.0 * simulation.country.states[i].state_infected) /
           simulation.country.states[i].population,
         70,
-        opacity
+        opacity + .3
       );
       circle(pos.x, pos.y, size);
     }

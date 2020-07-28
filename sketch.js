@@ -1,4 +1,4 @@
-/* global Simulation, createCanvas, background, frameCount, clear, Mappa, colorMode, HSB */
+/* global Simulation, createCanvas, background, frameCount, clear, Mappa, colorMode, HSB, createButtons */
 
 let simulation;
 let tot_num_of_states = 51;
