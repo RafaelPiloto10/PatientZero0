@@ -15,7 +15,7 @@ function setup() {
 function draw() {
   // background(frameCount % simulation.time_step);
   clear();
+  map.drawCases();
   simulation.update();
   simulation.debug();
-  map.drawCases();
 }
