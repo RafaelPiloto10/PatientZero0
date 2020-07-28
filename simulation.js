@@ -77,7 +77,6 @@ class Simulation {
       let state = state_data[i];
       let revenue = state.Pop * Simulation.healthcare_fund_per_person
       let init_ppe = 1;
-      
       states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, revenue, init_ppe, Simulation.spread_rate));
     }
     return states;

@@ -10,6 +10,7 @@ function setup() {
   canvas = createCanvas(600, 600);
   simulation = new Simulation(tot_num_of_states, "21 January 2020");
   map = new Map();
+  createButtons();
 }
 
 function draw() {

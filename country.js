@@ -51,6 +51,7 @@ class Country {
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;
+    this.simulate_random_travel(Simulation.date);
   }
 
   /*
@@ -103,6 +104,7 @@ class Country {
           // Randomly spread the virus based on virus spread in the National Geographic article
           let r2 = random();
           if (r2 > prob_contracting_covid) {
+            console.log(`Infected: ${arrivalState.id} via air travel`)
             arrivalState.infect(1, date);
           }
         }
