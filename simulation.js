@@ -32,7 +32,6 @@ class Simulation {
     this.paused = false;    
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
-    console.log(this.num_patient_zeros);
     this.country = new Country(this.createStates(), 0, this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
   }
 

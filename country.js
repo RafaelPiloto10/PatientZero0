@@ -31,7 +31,7 @@ class Country {
 
     this.patient_zero();
   }
-  
+
   /*
     Step through a new day for the country
   */
@@ -99,15 +99,18 @@ class Country {
 
       // randomly check if someone on a plane has COVID based on the probability that a person has COVID in the departure state
       let r = random();
+
       if (r < departureState.prob_person_has_covid) {
+        let infect_amt = 0;
         for (let j = 0; j < amt_passangers_at_risk; j++) {
           // Randomly spread the virus based on virus spread in the National Geographic article
           let r2 = random();
           if (r2 > prob_contracting_covid) {
-            console.log(`Infected: ${arrivalState.id} via air travel`)
-            arrivalState.infect(1, date);
+            infect_amt += 1;
           }
         }
+        console.log(`Infected: ${arrivalState.id} via air travel`);
+        arrivalState.infect(infect_amt, date);
       }
     }
   }

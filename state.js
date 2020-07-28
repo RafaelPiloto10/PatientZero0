@@ -35,9 +35,7 @@ class State {
     this.state_deaths = 0;
     this.state_infected = state_init_infected;
     this.state_recovered = 0;
-      
-    this.state_susciptible = this.population;
-
+    
     this.revenue = revenue;
     this.state_ppe = state_init_ppe;
     this.spread_rate = spread_rate;
@@ -60,19 +58,18 @@ class State {
       this.patient_zero_date = date;
     }
     
-    if(this.state_recovered + this.deaths >= this.population) {
+    if(this.state_recovered + this.state_deaths >= this.population) {
       console.log(`${this.id} cannot be infected. Population has developed antibodies.`);
       return false;
     } 
     
     this.state_infected += infected_amount;
-    this.state_susciptible -= infected_amount;
     this.infection_stack.push({ infected_amount, date });
 
-    if (this.state_infected > this.population - this.state_recovered - this.deaths) {
-      this.state_infected = this.population - this.state_recovered;
+    if (this.state_infected > this.population - this.state_recovered - this.state_deaths) {
+      this.state_infected = this.population - this.state_recovered - this.state_deaths;
       console.error(
-        `State: ${this.id}: overflow in infections - constrained to population-recovered!`
+        `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
       );
       return false;
     }
@@ -85,7 +82,7 @@ class State {
   */
   step() {
     let current_date = Simulation.date;
-    if (this.state_infected > 0) { // Only if we have an infected citizen should the virus spread
+    if (this.state_infected > 0 && this.state_recovered + this.state_deaths >= this.population) { // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
 
       let predicted_cases = this.get_predicted_cases_exponentially(
