@@ -14,6 +14,7 @@ class State {
     @param pop_density (float) - the population density of the state
     @param revenue (float) - the amount of money the state contributes in revenue towards the country
     @param state_init_ppe (int)- the amount of PPE the state will be receiving at the start of the simulation
+    
   
   */
   constructor(
@@ -44,6 +45,8 @@ class State {
     this.infection_stack = [];
 
     this.prob_person_has_covid = this.state_infected / this.population;
+      
+    this.reported_infected=false;
   }
 
   /*
@@ -104,6 +107,7 @@ class State {
     }
 
     this.prob_person_has_covid = this.state_infected / this.population;
+    
   }
 
   /*

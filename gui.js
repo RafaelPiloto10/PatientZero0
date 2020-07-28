@@ -27,4 +27,15 @@ function changeDisplay()
   isBudgetDisplayed=!isBudgetDisplayed;
 }
 
+function displayNewsStatus()
+{
+  if(isBudgetDisplayed){
+    btn_Display.label="You have $ "
+  }
+  
+  else{
+    for(let i=0;i<)
+  }
+}
+
 

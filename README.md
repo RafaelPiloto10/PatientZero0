@@ -10,7 +10,8 @@
 
 ## Known Bugs:
 
-- Need to optimize simulation & all nested child loops
+- Infection stack puts infections in groups, which leads to grouped recoveries.
+Due to the nature of exponential growth, the recoveries overtake total cases at the same time
 
 ## Change log:
 
