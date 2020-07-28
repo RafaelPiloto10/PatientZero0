@@ -46,7 +46,7 @@ class State {
 
     this.prob_person_has_covid = this.state_infected / this.population;
       
-    this.reported_infected=false;
+    this.not_reported_infected=true;
   }
 
   /*

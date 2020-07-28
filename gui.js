@@ -1,5 +1,5 @@
 /*
-global createButton, height, textSize, width
+global createButton, height, textSize, width, simulation, random
 
 */
 let btn_Advertise, btn_Display, isBudgetDisplayed;
@@ -25,16 +25,25 @@ function advertise()
 function changeDisplay()
 {
   isBudgetDisplayed=!isBudgetDisplayed;
+  displayNewsStatus()
 }
 
 function displayNewsStatus()
 {
+  console.log("attempting ")
   if(isBudgetDisplayed){
-    btn_Display.label="You have $ "
+    btn_Display.label="You have $"+"Million in bank.";
   }
   
   else{
-    for(let i=0;i<)
+    for(let i=0;i < simulation.country.states.length;i++)
+      {
+        if(simulation.country.states[i].not_reported_infected&&simulation.country.states[i].state_infected!=0&&(simulation.country.states[i].state_infected>=10||random(0,10)>=8)){
+          btn_Display.label="Another state has been infected!";
+          return;
+        }
+      }
+    btn_Display.label="There are no news at the moment.";
   }
 }
 
