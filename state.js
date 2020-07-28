@@ -66,7 +66,8 @@ class State {
     }
 
     this.state_infected += infected_amount;
-    this.infection_stack.push({ infected_amount, date });
+    
+    this.infection_stack.push({ infected_amount, date: new Date(date) });
     if (
       this.state_infected >
       this.population - this.state_recovered - this.state_deaths
@@ -122,7 +123,6 @@ class State {
         continue;
       }
       let d = getNumberDays(Simulation.date, infection.date);
-      console.log(d);
       if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
         this.infection_stack.splice(i, 1);
@@ -131,7 +131,7 @@ class State {
           if (r < Simulation.mortality_rate) {
             let _deaths = Math.floor(Simulation.mortality_rate * infection.infected_amount);
             infection.infected_amount -= _deaths;
-            deaths += -deaths;
+            deaths += _deaths;
           }
         
       }
