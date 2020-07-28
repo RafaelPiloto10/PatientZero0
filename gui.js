@@ -1,10 +1,10 @@
 /*
-global createButton, height, textSize, width, simulation, random
+global createButton, height, textSize, width, simulation, random, state_data
 
 */
-let btn_Advertise, btn_Display, isBudgetDisplayed;
+let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews;
 function createButtons(){
-  textSize(20);
+  textSize(15);
   btn_Advertise = createButton('Advertise Awareness');
   btn_Advertise.position(5,height+10)
   btn_Advertise.size(100,50)
@@ -15,6 +15,7 @@ function createButtons(){
   btn_Display.position(width+10,10)
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed=false;
+  currentNews="There is no news at the moment.";
 }
 
 function advertise()
@@ -30,20 +31,20 @@ function changeDisplay()
 
 function displayNewsStatus()
 {
-  console.log("attempting ")
   if(isBudgetDisplayed){
-    btn_Display.label="You have $"+"Million in bank.";
+    currentNews="You have $"+"Million in bank.";
   }
   
   else{
     for(let i=0;i < simulation.country.states.length;i++)
       {
         if(simulation.country.states[i].not_reported_infected&&simulation.country.states[i].state_infected!=0&&(simulation.country.states[i].state_infected>=10||random(0,10)>=8)){
-          btn_Display.label="Another state has been infected!";
+          currentNews=""+state_data[i].State+" has been infected!";
+          simulation.country.states[i].not_reported_infected=false;
           return;
         }
       }
-    btn_Display.label="There are no news at the moment.";
+    
   }
 }
 

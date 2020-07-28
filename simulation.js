@@ -1,4 +1,4 @@
-/* global state_data, frameCount, Country, State, fill, text, width, height*/
+/* global state_data, frameCount, Country, State, fill, text, width, height, currentNews, displayNewsStatus*/
 
 class Simulation {
   
@@ -31,6 +31,7 @@ class Simulation {
     this.time_step = 30 // 150; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
+    
     // states, init_funds, init_ppe, init_spread_rate, init_infected
     this.country = new Country(this.createStates(), 0, this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
   }
@@ -42,6 +43,7 @@ class Simulation {
     // TODO: Code that should happen each day ie. spread virus, update PPE, funds, etc.
     Simulation.date.setDate(Simulation.date.getDate() + 1);
     this.country.step();
+    displayNewsStatus();
   }
 
   /*
@@ -86,6 +88,7 @@ class Simulation {
   */
   debug(){
     fill(0);
+    text(currentNews,width/2,20);
     text(`Date: ${Simulation.date.toDateString()}`, 20, height - 40);
     text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
   }
