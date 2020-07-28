@@ -24,15 +24,14 @@ class Map {
     ) {
       let state = simulation.country.states[i];
       let pos = myMap.latLngToPixel(state.coords.x, state.coords.y);
-      let opacity = state.state_infected / state.population;
       let maxSize = (state_data[i].LandArea * Math.pow(myMap.zoom(), 3)) / 200000;
       let size = map(state.state_infected, 0, state.population, 5, maxSize);
       if (size < 2 * myMap.zoom()) size = 2 * myMap.zoom();
       fill(
         0,
-        map(state.state_infected, 0, state.population, 100),
+        map(state.state_infected, 0, state.population, 0, 100),
         70,
-        opacity + 0.3
+        map(state.state_infected, 0, state.population, 0, .9)
       );
       circle(pos.x, pos.y, size);
     }

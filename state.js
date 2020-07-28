@@ -35,6 +35,8 @@ class State {
     this.state_deaths = 0;
     this.state_infected = state_init_infected;
     this.state_recovered = 0;
+      
+    this.state_susciptible = this.population;
 
     this.revenue = revenue;
     this.state_ppe = state_init_ppe;
@@ -58,10 +60,16 @@ class State {
       this.patient_zero_date = date;
     }
     
+    if(this.state_recovered + this.deaths >= this.population) {
+      console.log(`${this.id} cannot be infected. Population has developed antibodies.`);
+      return false;
+    } 
+    
     this.state_infected += infected_amount;
+    this.state_susciptible -= infected_amount;
     this.infection_stack.push({ infected_amount, date });
 
-    if (this.state_infected > this.population - this.state_recovered) {
+    if (this.state_infected > this.population - this.state_recovered - this.deaths) {
       this.state_infected = this.population - this.state_recovered;
       console.error(
         `State: ${this.id}: overflow in infections - constrained to population-recovered!`
