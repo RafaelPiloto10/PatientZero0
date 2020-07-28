@@ -2,11 +2,11 @@
 global createButton, height
 
 */
-let button_Advertise;
+let btn_Advertise;
 function createButtons(){
-  button_Advertise = createButton('Advertise Awareness');
-  button_Advertise.position(5,height+10)
-  button_Advertise.mousePressed(advertise);
+  btn_Advertise = createButton('Advertise Awareness');
+  btn_Advertise.position(5,height+10)
+  btn_Advertise.mousePressed(advertise);
   
   
 }
@@ -15,3 +15,5 @@ function advertise()
 {
   
 }
+
+

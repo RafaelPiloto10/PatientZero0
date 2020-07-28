@@ -3,20 +3,20 @@
 let simulation;
 let tot_num_of_states = 51;
 let canvas;
-let map;
+let mmap;
 
 function setup() {
   colorMode(HSB, 360, 100, 100);
   canvas = createCanvas(600, 600);
   simulation = new Simulation(tot_num_of_states, "21 January 2020");
-  map = new Map();
+  mmap = new Map();
   createButtons();
 }
 
 function draw() {
   // background(frameCount % simulation.time_step);
   clear();
-  map.drawCases();
+  mmap.drawCases();
   simulation.update();
   simulation.debug();
 }
