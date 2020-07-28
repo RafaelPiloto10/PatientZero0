@@ -109,7 +109,7 @@ class Country {
             infect_amt += 1;
           }
         }
-        console.log(`Infected: ${arrivalState.id} via air travel`);
+        // console.log(`Infected: ${arrivalState.id} via air travel`);
         arrivalState.infect(infect_amt, date);
       }
     }

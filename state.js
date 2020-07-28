@@ -122,23 +122,24 @@ class State {
         continue;
       }
       let d = getNumberDays(Simulation.date, infection.date);
+      console.log(d);
       if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
         this.infection_stack.splice(i, 1);
       } else {
-        for (let j = 0; j < infection.infected_amount; j++) {
           let r = random();
           if (r < Simulation.mortality_rate) {
-            deaths += 1;
-            infection.infected_amount -= 1;
+            let _deaths = Math.floor(Simulation.mortality_rate * infection.infected_amount);
+            infection.infected_amount -= _deaths;
+            deaths += -deaths;
           }
-        }
+        
       }
     }
 
     this.state_deaths += deaths;
     this.state_recovered += recovered;
-    console.log(recovered);
+    // console.log(recovered);
     this.state_infected = Math.max(this.state_infected - deaths - recovered, 0);
   }
 
