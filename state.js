@@ -99,7 +99,7 @@ class State {
     let predicted_new_cases;
     if (
       this.state_infected > 0 &&
-      this.state_recovered + this.state_deaths <= this.population
+      this.state_recovered + this.state_deaths <= this.population && !this.quarantined
     ) {
       // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);

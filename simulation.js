@@ -116,7 +116,7 @@ class Simulation {
       height - 40
     );
     text(
-      `Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`,
+      `Population Infected: ${abbreviateNumber(this.country.statistics.total_infected)} Deaths: ${abbreviateNumber(this.country.statistics.deaths)} Recovered: ${abbreviateNumber(this.country.statistics.recovered)}`,
       20,
       height - 15
     );

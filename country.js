@@ -120,4 +120,24 @@ class Country {
       }
     }
   }
+  
+  quarantine() {
+    if(!this.states[0].quarantined) this.funds -= Simulation.quarantine_cost; 
+    for(let state of this.states) {
+      state.quarantine();
+    }
+    
+  }
+  
+  advertise() {
+    this.funds -= Simulation.advertisement_cost;
+    for(let state of this.states) {
+      state.advertise();
+    }
+  }
+  
+  usePPE() {
+    
+  }
+  
 }

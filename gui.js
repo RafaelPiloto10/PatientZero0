@@ -1,28 +1,28 @@
 /*
-global createButton, height, textSize, width, simulation, random, state_data
+global createButton, height, textSize, width, simulation, random, state_data, abbreviateNumber
 
 */
 let btn_Advertise, btn_Display, btn_StartQuarantine, btn_UsePPE;
 let isBudgetDisplayed, currentNews, currentDisplay;
 function createButtons() {
   textSize(15);
-  btn_Advertise = createButton("Broadcast Advertisements\nCost: $");
+  btn_Advertise = createButton("Broadcast Advertisements\nCost: $" +abbreviateNumber(simulation.advertisement_cost));
   btn_Advertise.position(5, height + 10);
   btn_Advertise.size(110, 55);
   btn_Advertise.mousePressed(advertise);
 
-  btn_StartQuarantine=createButton("Quarantine!");
+  btn_StartQuarantine=createButton("Quarantine!\nThis will be expensive.");
   btn_StartQuarantine.position(width+10,height/2);
-  btn_StartQuarantine.size(100,50);
+  btn_StartQuarantine.size(110,50);
   btn_StartQuarantine.mousePressed(quarantine)
   
-  btn_UsePPE=createButton("Use PPE");
+  btn_UsePPE=createButton("Use PPE\n");
   btn_UsePPE.position(width+10, height);
-  btn_UsePPE.size(100,50);
+  btn_UsePPE.size(110,50);
   btn_UsePPE.mousePressed(usePPE)
   
-  btn_Display = createButton("Click Here to show your budget, or the news.");
-  btn_Display.size(100, 100);
+  btn_Display = createButton("Click Here to cycle between your budget, or the news.");
+  btn_Display.size(110, 100);
   btn_Display.position(width + 10, 10);
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed = false;
@@ -50,7 +50,7 @@ function changeDisplay() {
 function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
-    currentDisplay = "You have $" + simulation.country.funds+ " in bank.";
+    currentDisplay = "You have $" + abbreviateNumber(simulation.country.funds)+ " in bank.";
   } else {
     
     for (let i = 0; i < simulation.country.states.length; i++) {
