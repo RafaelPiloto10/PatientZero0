@@ -10,21 +10,21 @@ function createButtons() {
     "Broadcast Advertisements\nCost: $" +
       abbreviateNumber(Simulation.advertisement_cost)
   );
-  btn_Advertise.position(5, height + 10);
+  btn_Advertise.position(width + 10, 190);
   btn_Advertise.size(110, 55);
   btn_Advertise.mousePressed(advertise);
 
   btn_StartQuarantine = createButton(
     "Quarantine!\nCost: $" + abbreviateNumber(Simulation.quarantine_cost)
   );
-  btn_StartQuarantine.position(115, height + 10);
+  btn_StartQuarantine.position(width + 10, 130);
   btn_StartQuarantine.size(110, 55);
   btn_StartQuarantine.mousePressed(quarantine);
 
   btn_UsePPE = createButton(
     "Use PPE\nCost: $" + abbreviateNumber(Simulation.PPE_cost)
   );
-  btn_UsePPE.position(225, height + 10);
+  btn_UsePPE.position(width + 10, 70);
   btn_UsePPE.size(110, 55);
   btn_UsePPE.mousePressed(usePPE);
 
@@ -32,10 +32,10 @@ function createButtons() {
     "Click here to cycle between your budget, or the news."
   );
   btn_Display.size(110,  55);
-  btn_Display.position(width - 110, height + 10);
+  btn_Display.position(width + 10, 10);
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed = false;
-  currentNews = "There is no news at the moment.";
+  currentNews = "There is no breaking news at this time.";
   currentDisplay = currentNews;
 }
 
@@ -70,7 +70,7 @@ function displayNewsStatus() {
           simulation.country.states[i].state_recovered ==
           simulation.country.states[i].population
       ) {
-        currentNews = "" + state_data[i].State + " is now immune to COVID-19!";
+        currentNews = "Breaking News: " + state_data[i].State + " is now immune to COVID-19!";
         simulation.country.states[i].not_reported_immunity = false;
         currentDisplay = currentNews;
         return;
@@ -89,7 +89,7 @@ function displayNewsStatus() {
             2
           );
           currentNews =
-            "Estimates show there are " +
+            "Breaking News: Estimates show there are " +
             abbreviateNumber(infected_estimate) +
             " infected in " +
             state.id +
@@ -108,7 +108,7 @@ function displayNewsStatus() {
             random(0, 100) >= 95)
         ) {
           currentNews =
-            "" + state_data[i].State + " has been confirmed infected!";
+            "Breaking News: " + state_data[i].State + " has been confirmed infected!";
           simulation.country.states[i].not_reported_infected = false;
           currentDisplay = currentNews;
           return;
