@@ -101,10 +101,10 @@ class State {
       // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
 
-      // let predicted_cases = this.get_predicted_cases_exponentially(
-      //   current_date
-      // );
-      let predicted_cases = this.get_predicted_cases_SIR();
+      let predicted_cases = this.get_predicted_cases_exponentially(
+        current_date
+      );
+      // let predicted_cases = this.get_predicted_cases_SIR();
       let predicted_new_cases = predicted_cases - this.state_infected;
 
       this.infect(predicted_new_cases, current_date);
@@ -189,9 +189,11 @@ class State {
     // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
     // R is the number of people recovered, and N is the population number
     // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
-    let S = this.population - this.state_infected - this.state_recovered - this.state_deaths
-    let b = this.state_ppe / this.state_ppe_capacity;
-    return this.spread_rate * (S) * (this.state_infected) -  b * this.state_infected;
+    let S = this.population - this.state_infected - this.state_recovered - this.state_deaths;
+    let a = .288;
+    // let b = this.state_ppe / this.state_ppe_capacity;
+    let b = 1 * Math.pow(10, 6);
+    return Math.floor(a * (S) * (this.state_infected) -  b * this.state_infected);
   }
 }
 
