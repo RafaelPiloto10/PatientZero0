@@ -2,7 +2,8 @@
 global createButton, height, textSize, width, simulation, random, state_data
 
 */
-let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews, currentDisplay;
+let btn_Advertise, btn_Display
+let isBudgetDisplayed, currentNews, currentDisplay;
 function createButtons() {
   textSize(15);
   btn_Advertise = createButton("Advertise Awareness");
@@ -19,7 +20,12 @@ function createButtons() {
   currentDisplay = currentNews;
 }
 
-function advertise() {}
+function advertise() 
+{
+  
+}
+
+
 
 function changeDisplay() {
   isBudgetDisplayed = !isBudgetDisplayed;
