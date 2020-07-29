@@ -3,18 +3,13 @@
 ## TODO:
 
 - Rafael
-  - (7/25) Find state economic contribution to US healthcare
-  - (7/25) Find more resources/papers to further simulation accuracy
-  - (7/26) Improve case prediction model
-  - (7/26) US PPE capacity
+  - Implement counter measures that affect spread rate
 
 ## Known Bugs:
 
-- Infection stack puts infections in groups, which leads to grouped recoveries.
-Due to the nature of exponential growth, the recoveries overtake total cases at the same time
-
 ## Change log:
 
+- (7/28) Fixed exponential recovery bug by changing spread rate over time - Rafael
 - (7/28) Implemented buttons outside the map that can be programmed to affect the simulation - Diego
 - (7/27) Implemented circles that follow the map position for each state to react to how infected they are with COVID - Diego
 - (7/27) Implemented Mappa.js to load a map of the United States w/ the ability to use the location information - Diego

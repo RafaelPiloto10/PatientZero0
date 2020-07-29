@@ -197,6 +197,14 @@ class State {
     let b = 1 * Math.pow(10, 6);
     return Math.floor(a * (S) * (this.state_infected) -  b * this.state_infected);
   }
+  
+  advertise_awareness() {
+    this.spread_rate -= Simulation.advertise_awareness_step;
+  }
+  
+  use_ppe() {
+    this.spread_rate -= Simulation.ppe_step
+  }
 }
 
 function getNumberDays(future, past) {

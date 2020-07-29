@@ -19,7 +19,7 @@ class Simulation {
     Simulation.healthcare_tax = 0.05; // Healthcare tax
     Simulation.median_household_income = 63179.00;
     Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
-    Simulation.PPE_cost = 50/25;
+    Simulation.PPE_cost = 2;
     
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
