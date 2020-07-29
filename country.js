@@ -54,7 +54,7 @@ class Country {
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;
-    this.statistics.spread_rate 
+    this.statistics.spread_rate = spread_rate / this.num_states;
   }
 
   /*

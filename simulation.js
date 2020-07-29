@@ -29,7 +29,7 @@ class Simulation {
     this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
     Simulation.date = new Date(start_date);
-    this.time_step = 150; // frames per day - ie. For every N frames, it is a new day
+    this.time_step = 75 // 150; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
     
@@ -90,7 +90,7 @@ class Simulation {
   debug(){
     fill(0);
     text(currentDisplay,width/2,20,width/2,height);
-    text(`Date: ${Simulation.date.toDateString()}`, 20, height - 40);
+    text(`Date: ${Simulation.date.toDateString()}, Avg. Spread Rate: ${Number(this.country.statistics.spread_rate).toFixed(4)}`, 20, height - 40);
     text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
   }
 }
