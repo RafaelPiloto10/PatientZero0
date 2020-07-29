@@ -187,6 +187,7 @@ class State {
     // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
     // R is the number of people recovered, and N is the population number
     // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
+    return this.spread_rate * (this.population - this.state_infected - this.recovered - this.state_deaths) - 
   }
 }
 
