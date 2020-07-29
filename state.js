@@ -45,7 +45,7 @@ class State {
     this.has_patient_zero = false;
     this.infection_stack = [];
       
-    this.quarentined = false;
+    this.quarantined = false;
 
     this.prob_person_has_covid = this.state_infected / this.population;
       
@@ -99,18 +99,20 @@ class State {
     let predicted_new_cases;
     if (
       this.state_infected > 0 &&
-      this.state_recovered + this.state_deaths <= this.population && !this.quarantined
+      this.state_recovered + this.state_deaths <= this.population
     ) {
       // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
-
+      
       let predicted_cases = this.get_predicted_cases_exponentially(
         current_date
       );
-      // let predicted_cases = this.get_predicted_cases_SIR();
-      predicted_new_cases = predicted_cases - this.state_infected;
+      if(!this.quarantined){
+        // let predicted_cases = this.get_predicted_cases_SIR();
+        predicted_new_cases = predicted_cases - this.state_infected;
 
-      this.infect(predicted_new_cases, current_date);
+        this.infect(predicted_new_cases, current_date);
+      }
     }
     this.state_infected = constrain(this.state_infected, 0, this.population);
     this.state_recovered = constrain(this.state_recovered, 0, this.population);
@@ -176,7 +178,7 @@ class State {
     );
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
-    return !this.quarentined ? Math.floor(
+    return !this.quarantined ? Math.floor(
       Math.exp(this.spread_rate * delta_time_in_days)
     ) : 0;
   }
@@ -212,9 +214,9 @@ class State {
     this.spread_rate -= Simulation.ppe_step;
   }
   
-  quarentine(toggle=!this.quarentined) {
-    if(!this.quarentined && toggle) this.patient_zero_date = new Date(Simulation.date);
-    this.quarentined = toggle;
+  quarantine(toggle=!this.quarantined) {
+    if(!this.quarantined && toggle) this.patient_zero_date = new Date(Simulation.date);
+    this.quarantined = toggle;
   }
   
   collect_healthcare_tax() {

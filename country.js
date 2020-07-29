@@ -138,6 +138,10 @@ class Country {
   
   usePPE() {
     
+    for(let state of this.states) {
+      this.funds -= state.get_ppe_cost()
+      state.use_ppe();
+    }
   }
   
 }
