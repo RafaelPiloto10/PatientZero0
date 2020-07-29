@@ -16,7 +16,7 @@ class Map {
   }
 
   drawCases() {
-    noStroke();
+    stroke(0);
     for (
       let i = 0;
       i < simulation.country.states.length;
@@ -30,8 +30,8 @@ class Map {
       fill(
         0,
         map(state.state_infected, 0, state.population, 30, 100),
-        70,
-        map(state.state_infected, 0, state.population, .3, .9)
+        80,
+        map(state.state_infected, 0, state.population, .3, .7)
       );
       circle(pos.x, pos.y, size);
     }
