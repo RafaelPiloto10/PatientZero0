@@ -1,4 +1,4 @@
-/* global createVector, Simulation, random */
+/* global createVector, Simulation, random, constrain*/
 
 /*
   State class meant to simulate an individual state with unique state properties
@@ -39,6 +39,7 @@ class State {
 
     this.revenue = revenue;
     this.state_ppe = state_init_ppe;
+    this.state_ppe_capacity = state_init_ppe;
     this.spread_rate = spread_rate;
 
     this.has_patient_zero = false;
@@ -100,9 +101,10 @@ class State {
       // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
 
-      let predicted_cases = this.get_predicted_cases_exponentially(
-        current_date
-      );
+      // let predicted_cases = this.get_predicted_cases_exponentially(
+      //   current_date
+      // );
+      let predicted_cases = this.get_predicted_cases_SIR();
       let predicted_new_cases = predicted_cases - this.state_infected;
 
       this.infect(predicted_new_cases, current_date);
@@ -181,13 +183,15 @@ class State {
     
     @return - the number of new cases 
   */
-  get_predicted_cases_SIR(current_date) {
+  get_predicted_cases_SIR() {
     // Using a SIR Model
     // Rate of increase for infectious cases = dI/dt = BS(I/N)
     // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
     // R is the number of people recovered, and N is the population number
     // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
-    return this.spread_rate * (this.population - this.state_infected - this.recovered - this.state_deaths) - 
+    let S = this.population - this.state_infected - this.state_recovered - this.state_deaths
+    let b = this.state_ppe / this.state_ppe_capacity;
+    return this.spread_rate * (S) * (this.state_infected) -  b * this.state_infected;
   }
 }
 
