@@ -52,7 +52,7 @@ class Country {
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
     }
-    this.new_cases.push(total_new_cases)
+    this.new_cases.push({x: new Date(Simulation.date), y: total_new_cases});
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;

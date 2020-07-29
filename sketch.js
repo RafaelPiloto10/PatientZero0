@@ -7,16 +7,18 @@ let mmap;
 let graph;
 
 function setup() {
+  let container = document.getElementById("p5container");
   colorMode(HSB, 360, 100, 100);
   canvas = createCanvas(600, 600);
   simulation = new Simulation(tot_num_of_states, "21 January 2020");
+  canvas.parent("p5canvas");
   mmap = new Map();
   createButtons();
   graph = new CanvasJS.Chart("chartContainer", {
     exportEnabled: true,
     title: { text: "New Cases per Day" },
     axisY: { title: "New Confirmed Cases", includeZero: true},
-    data: [{type: "splineArea", color:"rgba(255, 0, 0, .7)", markerSize: 0, dataPoints: simulation.country.new_cases}]
+    data: [{type: "spline", color:"rgba(255, 0, 0, .7)", markerSize: 0, dataPoints: simulation.country.new_cases}]
   })
 }
 
