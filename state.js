@@ -47,6 +47,7 @@ class State {
     this.prob_person_has_covid = this.state_infected / this.population;
       
     this.not_reported_infected=true; //If the state has been reported on the news to be infected
+    this.not_reported_immunity=false;//If the state has been reported on the news to be immune
   }
 
   /*
