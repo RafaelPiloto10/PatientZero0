@@ -106,7 +106,9 @@ class State {
 
       this.infect(predicted_new_cases, current_date);
     }
-
+    this.state_infected = constrain(this.state_infected, 0, this.population);
+    this.state_recovered = constrain(this.state_recovered, 0, this.population);
+    this.state_deaths = constrain(this.state_deaths, 0, this.population)
     this.prob_person_has_covid = this.state_infected / this.population;
     
   }
@@ -130,7 +132,7 @@ class State {
       let d = getNumberDays(Simulation.date, infection.date);
       if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
-        this.spread_rate -= (Simulation.spread_rate_step  + 0.000001) * infection.infected_amount;
+        this.spread_rate -= (Simulation.spread_rate_step  + 0.00000001) * infection.infected_amount;
         this.infection_stack.splice(i, 1);
       } else {
           let r = random();
@@ -138,7 +140,7 @@ class State {
             let _deaths = Math.floor(Simulation.mortality_rate * infection.infected_amount);
             infection.infected_amount -= _deaths;
             deaths += _deaths;
-            this.spread_rate -= (Simulation.spread_rate_step + 0.000002) * _deaths;
+            this.spread_rate -= (Simulation.spread_rate_step + 0.00000002) * _deaths;
           }
         
       }

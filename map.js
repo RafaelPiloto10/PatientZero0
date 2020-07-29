@@ -25,7 +25,7 @@ class Map {
       let state = simulation.country.states[i];
       let pos = myMap.latLngToPixel(state.coords.x, state.coords.y);
       let maxSize = (state_data[i].LandArea * Math.pow(myMap.zoom(), 3)) / 200000;
-      let size = map(state.state_infected, 0, state.population, 5, 10);
+      let size = map(constrain(state.prob_person_has_covid, 0, 1), 0, 1, 2, maxSize);
       if (size < 2 * myMap.zoom()) size = 2 * myMap.zoom();
       fill(
         0,
