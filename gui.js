@@ -2,7 +2,7 @@
 global createButton, height, textSize, width, simulation, random, state_data
 
 */
-let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews;
+let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews, currentDisplay;
 function createButtons(){
   textSize(15);
   btn_Advertise = createButton('Advertise Awareness');
@@ -16,6 +16,7 @@ function createButtons(){
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed=false;
   currentNews="There is no news at the moment.";
+  currentDisplay=currentNews
 }
 
 function advertise()
@@ -32,32 +33,34 @@ function changeDisplay()
 function displayNewsStatus()
 {
   if(isBudgetDisplayed){
-    currentNews="You have $"+"Million in bank.";
+    currentDisplay="You have $"+"Million in bank.";
   }
   
-  else{
+  else
+  {
     for(let i=0;i < simulation.country.states.length;i++)
       {
         if(simulation.country.states[i].not_reported_infected&&simulation.country.states[i].state_infected!=0&&(simulation.country.states[i].state_infected>=10||random(0,10)>=8)){
           currentNews=""+state_data[i].State+" has been confirmed infected!";
           simulation.country.states[i].not_reported_infected=false;
+          currentDisplay=currentNews;
           return;
         }
       }
-    if(Math.random(0,10)>8)
-      while(true){
-        let i=Math.floor(random(0,simulation.country.states.length+1))
-        if(!simulation.country.states[i].not_reported_infected){
-          let infected_estimate=Math.pow(Math.round(Math.sqrt(simulation.country.states[i].state_infected)),2);
-          currentNews="Estimates show there are "+infected_estimate+"infected in "+state_data[i].State+"!";
-          return;
-        }
-      }
-    
-    }
-    
-    
+    if()
+    //if(Math.random(0,10)>8)
+      // while(true){
+      //   let state=random(simulation.country.states);
+      //   if(state.not_reported_infected==false){
+      //     let infected_estimate=Math.pow(Math.round(Math.sqrt(state.state_infected)),2);
+      //     currentNews="Estimates show there are "+infected_estimate+"infected in "+state.id+"!";
+      //     currentDisplay=currentNews;
+      //     return;
+      //   }
+      // }
+    currentDisplay=currentNews;
   }
+    
 }
 
 

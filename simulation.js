@@ -1,4 +1,4 @@
-/* global state_data, frameCount, Country, State, fill, text, width, height, currentNews, displayNewsStatus*/
+/* global state_data, frameCount, Country, State, fill, text, width, height, currentDisplay, displayNewsStatus*/
 
 class Simulation {
   
@@ -88,7 +88,7 @@ class Simulation {
   */
   debug(){
     fill(0);
-    text(currentNews,width/2,20);
+    text(currentDisplay,width/2,20);
     text(`Date: ${Simulation.date.toDateString()}`, 20, height - 40);
     text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
   }
