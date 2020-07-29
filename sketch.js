@@ -16,7 +16,7 @@ function setup() {
     exportEnabled: true,
     title: { text: "New Cases per Day" },
     axisY: { title: "New Confirmed Cases", includeZero: true},
-    data: [{type: "splineArea", color:"rgba(255, 0, 0, .7)", markerSize: 0 }]
+    data: [{type: "splineArea", color:"rgba(255, 0, 0, .7)", markerSize: 0, dataPoints: simulation.country.new_cases}]
   })
 }
 
@@ -26,4 +26,5 @@ function draw() {
   mmap.drawCases();
   simulation.update();
   simulation.debug();
+  graph.render();
 }

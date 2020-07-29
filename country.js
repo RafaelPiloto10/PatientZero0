@@ -42,16 +42,17 @@ class Country {
     let recovered = 0;
     let dead = 0;
     let spread_rate = 0;
+    let total_new_cases = 0;
     
     this.simulate_random_travel(Simulation.date);
     for (let state of this.states) {
-      state.step();
+      total_new_cases += state.step();
       infected += state.state_infected;
       recovered += state.state_recovered;
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
     }
-    this.new_cases.push(infected - this.)
+    this.new_cases.push(total_new_cases)
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;
