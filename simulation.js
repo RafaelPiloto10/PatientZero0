@@ -14,11 +14,11 @@ class Simulation {
     Simulation.start_date = new Date(start_date); // Date of patient zer0
     Simulation.mortality_rate = 0.035; // Avg. COVID 19 Mortality rate from WHO - https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200306-sitrep-46-covid-19.pdf?sfvrsn=96b04adf_4
     Simulation.spread_rate = 0.288;
+    Simulation.spread_rate_step = 0.0000001;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
     Simulation.median_household_income = 63179.00;
     Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
-    
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
@@ -88,7 +88,7 @@ class Simulation {
   */
   debug(){
     fill(0);
-    text(currentDisplay,width/2,20);
+    text(currentDisplay,width/2,20,width/2,height);
     text(`Date: ${Simulation.date.toDateString()}`, 20, height - 40);
     text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
   }

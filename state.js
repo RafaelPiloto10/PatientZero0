@@ -67,23 +67,24 @@ class State {
       );
       return false;
     }
-
+    infected_amount = constrain(infected_amount, 0, this.population - this.state_recovered - this.state_deaths);
     this.state_infected += infected_amount;
+    this.spread_rate += infected_amount * Simulation.spread_rate_step;
     
     this.infection_stack.push({ infected_amount, date: new Date(date) });
-    if (
-      this.state_infected >
-      this.population - this.state_recovered - this.state_deaths
-    ) {
-      this.state_infected =
-        this.population - this.state_recovered - this.state_deaths;
-      console.error(
-        `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
-      );
-      return false;
-    }
+//     if (
+//       this.state_infected >
+//       this.population - this.state_recovered - this.state_deaths
+//     ) {
+//       this.state_infected =
+//         this.population - this.state_recovered - this.state_deaths;
+//       console.error(
+//         `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
+//       );
+//       return false;
+//     }
 
-    return true;
+//     return true;
   }
 
   /*
@@ -129,6 +130,7 @@ class State {
       let d = getNumberDays(Simulation.date, infection.date);
       if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
+        this.spread_rate -= Simulation.spread_rate_step * infection.infected_amount;
         this.infection_stack.splice(i, 1);
       } else {
           let r = random();
@@ -136,6 +138,7 @@ class State {
             let _deaths = Math.floor(Simulation.mortality_rate * infection.infected_amount);
             infection.infected_amount -= _deaths;
             deaths += _deaths;
+            this.spread_rate -= Simulation.spread_rate_step * _deaths;
           }
         
       }
