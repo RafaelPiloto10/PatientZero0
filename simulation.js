@@ -1,8 +1,6 @@
 /* global state_data, frameCount, Country, State, fill, text, width, height, currentDisplay, displayNewsStatus*/
 
 class Simulation {
-  
-  
   /* 
     Constructor for the Simulation class
     
@@ -17,12 +15,13 @@ class Simulation {
     Simulation.spread_rate_step = 0.00000000001;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
-    Simulation.median_household_income = 63179.00;
-    Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
+    Simulation.median_household_income = 63179.0;
+    Simulation.healthcare_fund_per_person =
+      Simulation.median_household_income * Simulation.heathcare_tax;
     Simulation.PPE_cost = 2;
     Simulation.advertisement_cost = 400000;
     Simulation.quarentine_cost = 25000000000;
-    
+
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
@@ -31,11 +30,17 @@ class Simulation {
     this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
     Simulation.date = new Date(start_date);
-    this.time_step = 75 // 150; // frames per day - ie. For every N frames, it is a new day
-    this.paused = false;    
+    this.time_step = 75; // 150; // frames per day - ie. For every N frames, it is a new day
+    this.paused = false;
 
     // states, init_funds, init_ppe, init_spread_rate, init_infected
-    this.country = new Country(this.createStates(), this.start_funds, this.start_ppe, Simulation.spread_rate, this.num_patient_zeros);
+    this.country = new Country(
+      this.createStates(),
+      this.start_funds,
+      this.start_ppe,
+      Simulation.spread_rate,
+      this.num_patient_zeros
+    );
   }
 
   /*
@@ -66,7 +71,7 @@ class Simulation {
   togglePause(set = null) {
     this.paused = set == null ? !this.paused : set;
   }
-  
+
   /*
     Create the states based on their data
     
@@ -74,13 +79,25 @@ class Simulation {
   */
   createStates() {
     let states = [];
-    
-    for(let i = 0; i < this.num_states; i++) {
+
+    for (let i = 0; i < this.num_states; i++) {
       // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
       let state = state_data[i];
-      let revenue = state.Pop * Simulation.healthcare_fund_per_person
+      let revenue = state.Pop * Simulation.healthcare_fund_per_person;
       let init_ppe = 1;
-      states.push(new State(state.longitude, state.latitude, state.State, state.Pop, state.Density, 0, revenue, init_ppe, Simulation.spread_rate));
+      states.push(
+        new State(
+          state.longitude,
+          state.latitude,
+          state.State,
+          state.Pop,
+          state.Density,
+          0,
+          revenue,
+          init_ppe,
+          Simulation.spread_rate
+        )
+      );
     }
     return states;
   }
@@ -88,10 +105,41 @@ class Simulation {
   /*
     Debug code to visualize the time and how many people are infected
   */
-  debug(){
+  debug() {
     fill(0);
-    text(currentDisplay,width/2,20,width/2,height);
-    text(`Date: ${Simulation.date.toDateString()}, Avg. Spread Rate: ${Number(this.country.statistics.spread_rate).toFixed(4)}`, 20, height - 40);
-    text(`Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`, 20, height - 15)
+    text(currentDisplay, width / 2, 20, width / 2, height);
+    text(
+      `Date: ${Simulation.date.toDateString()}, Avg. Spread Rate: ${Number(
+        this.country.statistics.spread_rate
+      ).toFixed(4)}`,
+      20,
+      height - 40
+    );
+    text(
+      `Population Infected: ${this.country.statistics.total_infected} Deaths: ${this.country.statistics.deaths} Recovered: ${this.country.statistics.recovered}`,
+      20,
+      height - 15
+    );
+  }
+
+  quarantine() {
+    this.funds -= Simulation.quarantine_cost;
+    for (let state of this.states) {
+      state.quarantine();
+    }
+  }
+
+  usePPE() {
+    this.funds -= Simulation.use_PPE_cost;
+    for (let state of this.states) {
+      state.usePPE();
+    }
+  }
+
+  advertise() {
+    this.funds -= Simulation.advertise_cost;
+    for (let state of this.states) {
+      state.advertise();
+    }
   }
 }

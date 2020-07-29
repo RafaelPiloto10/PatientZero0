@@ -216,6 +216,10 @@ class State {
     if(!this.quarentined && toggle) this.patient_zero_date = new Date(Simulation.date);
     this.quarentined = toggle;
   }
+  
+  collect_healthcare_tax() {
+    return this.quarantined ? 0:this.population * Simulation.healthcare_fund_per_person;
+  }
 }
 
 function getNumberDays(future, past) {
