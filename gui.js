@@ -39,11 +39,23 @@ function displayNewsStatus()
     for(let i=0;i < simulation.country.states.length;i++)
       {
         if(simulation.country.states[i].not_reported_infected&&simulation.country.states[i].state_infected!=0&&(simulation.country.states[i].state_infected>=10||random(0,10)>=8)){
-          currentNews=""+state_data[i].State+" has been infected!";
+          currentNews=""+state_data[i].State+" has been confirmed infected!";
           simulation.country.states[i].not_reported_infected=false;
           return;
         }
       }
+    if(Math.random(0,10)>8)
+      while(true){
+        let i=Math.floor(random(0,simulation.country.states.length+1))
+        if(!simulation.country.states[i].not_reported_infected){
+          let infected_estimate=Math.pow(Math.round(Math.sqrt(simulation.country.states[i].state_infected)),2);
+          currentNews="Estimates show there are "+infected_estimate+"infected in "+state_data[i].State+"!";
+          return;
+        }
+      }
+    
+    }
+    
     
   }
 }
