@@ -41,7 +41,7 @@ function displayNewsStatus() {
       ) {
         currentNews =
           "" + state_data[i].State + " is now immune to COVID-19!";
-        simulation.country.states[i].not_reported_immune = false;
+        simulation.country.states[i].not_reported_immunity = false;
         currentDisplay = currentNews;
         return;
       }
