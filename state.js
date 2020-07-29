@@ -108,7 +108,7 @@ class State {
     }
     this.state_infected = constrain(this.state_infected, 0, this.population);
     this.state_recovered = constrain(this.state_recovered, 0, this.population);
-    this.state_deaths = constrain(this.state_deaths, 0, this.population)
+    this.state_deaths = constrain(this.state_deaths, 0, this.population); 
     this.prob_person_has_covid = this.state_infected / this.population;
     
   }

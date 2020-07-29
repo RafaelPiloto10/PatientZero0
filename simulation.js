@@ -19,15 +19,17 @@ class Simulation {
     Simulation.healthcare_tax = 0.05; // Healthcare tax
     Simulation.median_household_income = 63179.00;
     Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
+    Simulation.PPE_cost = 50/25;
+    
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
     this.start_funds = 2.5 * 1000000000000; // Starting funds
-    this.start_ppe = 1.0; // How much PPE is available at the start of the game
+    this.start_ppe = 20000; // How much PPE is available at the start of the game
     this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
     Simulation.date = new Date(start_date);
-    this.time_step = 30 // 150; // frames per day - ie. For every N frames, it is a new day
+    this.time_step = 150; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
     
