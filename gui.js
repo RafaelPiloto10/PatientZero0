@@ -29,7 +29,7 @@ function createButtons() {
   btn_UsePPE.mousePressed(usePPE);
 
   btn_Display = createButton(
-    "Click Here to cycle between your budget, or the news."
+    "Click here to cycle between your budget, or the news."
   );
   btn_Display.size(110, 100);
   btn_Display.position(width + 10, 10);
@@ -77,14 +77,12 @@ function displayNewsStatus() {
       }
     }
 
-    if (simulation.country.statistics.total_infected > 10000)
       //estimates how many infected are in a state if there is enough
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 10; i++) {
         let state = random(simulation.country.states);
         if (
           !state.not_reported_infected &&
-          state.not_reported_immunity &&
-          state.state_infected > 100
+          state.state_infected > 1500
         ) {
           let infected_estimate = Math.pow(
             Math.round(Math.sqrt(state.state_infected)),

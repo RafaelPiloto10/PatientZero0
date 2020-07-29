@@ -17,7 +17,7 @@ class Simulation {
     Simulation.healthcare_tax = 0.05; // Healthcare tax
     Simulation.median_household_income = 63179.0;
     Simulation.healthcare_fund_per_person =
-      Simulation.median_household_income * Simulation.heathcare_tax;
+      Simulation.median_household_income * Simulation.healthcare_tax;
     Simulation.advertisement_cost = 400000;
     Simulation.quarantine_cost = 25000000000;
     Simulation.PPE_step = 0.002;
@@ -53,10 +53,13 @@ class Simulation {
     displayNewsStatus();
     
     // has a random chance to give a random country +1 infected
-    if(random(0,100)<11){
+    if(random(0,100)<16){
       let random_state = random(this.country.states);
-      console.log("Randomly infected " + random_state.id);
-      random_state.infect(1, Simulation.date);
+      if(random_state.not_reported_immunity)
+      {
+        console.log("Randomly infected " + random_state.id);
+        random_state.infect(1, Simulation.date);
+      }
     }
     
   }
