@@ -44,6 +44,8 @@ class State {
 
     this.has_patient_zero = false;
     this.infection_stack = [];
+      
+    this.quarentined = false;
 
     this.prob_person_has_covid = this.state_infected / this.population;
       
@@ -174,9 +176,9 @@ class State {
     );
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
-    return Math.floor(
-      Math.exp(this.spread_rate * delta_time_in_days) / this.state_ppe
-    );
+    return !this.quarentined ? Math.floor(
+      Math.exp(this.spread_rate * delta_time_in_days)
+    ) : 0;
   }
 
   /*
@@ -203,7 +205,12 @@ class State {
   }
   
   use_ppe() {
-    this.spread_rate -= Simulation.ppe_step
+    this.spread_rate -= Simulation.ppe_step;
+  }
+  
+  quarentine(toggle=!this.quarentined) {
+    if(!this.quarentined && toggle) this.patient_zero_date = new Date(Simulation.date);
+    this.quarentined = toggle;
   }
 }
 
