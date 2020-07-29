@@ -6,9 +6,9 @@ let btn_Advertise, btn_Display
 let isBudgetDisplayed, currentNews, currentDisplay;
 function createButtons() {
   textSize(15);
-  btn_Advertise = createButton("Advertise Awareness");
+  btn_Advertise = createButton("Broadcast Advertisements\nCost: $");
   btn_Advertise.position(5, height + 10);
-  btn_Advertise.size(100, 50);
+  btn_Advertise.size(110, 55);
   btn_Advertise.mousePressed(advertise);
 
   btn_Display = createButton("Click Here to show your budget, or the news.");
@@ -20,8 +20,15 @@ function createButtons() {
   currentDisplay = currentNews;
 }
 
-function advertise() 
-{
+function advertise() {
+  simulation.country.advertise();
+}
+
+function quarentine() {
+  simulation.country.quarentine();
+}
+
+function usePPE() {
   
 }
 
@@ -35,7 +42,7 @@ function changeDisplay() {
 function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
-    currentDisplay = "You have $" + "Million in bank.";
+    currentDisplay = "You have $" + simulation.country.funds+ " in bank.";
   } else {
     
     for (let i = 0; i < simulation.country.states.length; i++) {

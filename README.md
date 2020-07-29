@@ -33,3 +33,4 @@
 - [Modeling virus spread with population density](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
 - [Median Household income in US](https://www.investopedia.com/personal-finance/what-average-income-us/)
 - [5% of taxes are for healthcare related services](https://www.crfb.org/papers/american-health-care-health-spending-and-federal-budget)
+- [Quarentine costs US $25 Billion per day](https://www.bizjournals.com/stlouis/news/2020/04/14/quarantine-costs-u-s-25-billion-a-day-st-louis.html)

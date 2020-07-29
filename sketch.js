@@ -14,17 +14,30 @@ function setup() {
   createButtons();
   graph = new CanvasJS.Chart("chartContainer", {
     exportEnabled: true,
-    title: { text: "New Cases per Day" },
-    axisY: { title: "New Confirmed Cases", includeZero: true},
-    data: [{type: "spline", color:"rgba(255, 0, 0, .7)", markerSize: 0, dataPoints: simulation.country.new_cases}]
-  })
+    title: { text: "Δ Cases Over Time (days)" },
+    axisY: { title: "Δ Confirmed Cases", includeZero: true },
+    data: [
+      {
+        type: "spline",
+        color: "rgba(255, 0, 0, .7)",
+        markerSize: 0,
+        dataPoints: simulation.country.new_cases
+      }
+    ]
+  });
 }
 
 function draw() {
   // background(frameCount % simulation.time_step);
   clear();
   mmap.drawCases();
-  simulation.update();
-  simulation.debug();
+  if (simulation.country.statistics.total_infected > 0) {
+    simulation.update();
+    simulation.debug();
+  } else {
+    textAlign(CENTER);
+    text("COVID-19 has been eradicated in the US!", width / 2, height / 2);
+    noLoop();
+  }
   graph.render();
 }

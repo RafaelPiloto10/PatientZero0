@@ -20,6 +20,8 @@ class Simulation {
     Simulation.median_household_income = 63179.00;
     Simulation.healthcare_fund_per_person = Simulation.median_household_income * Simulation.heathcare_tax;
     Simulation.PPE_cost = 2;
+    Simulation.advertisement_cost = 400000;
+    Simulation.quarentine_cost = 25000000000;
     
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population

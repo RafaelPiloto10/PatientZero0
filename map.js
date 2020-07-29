@@ -1,12 +1,12 @@
 /*
-global Mappa, canvas, circle, state_data, simulation, fill, noStroke, map
+global Mappa, canvas, circle, state_data, stroke, simulation, fill, noStroke, map
 */
 let myMap;
 const mappa = new Mappa("Leaflet");
 const options = {
   lat: 37.0902,
   lng: -95.7129,
-  zoom: 4,
+  zoom: 3,
   style: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
 };
 class Map {
