@@ -204,6 +204,10 @@ class State {
     this.spread_rate -= Simulation.advertise_awareness_step;
   }
   
+  get_ppe_cost() {
+    return this.population * Simulation.ppe_cost;
+  }
+  
   use_ppe() {
     this.spread_rate -= Simulation.ppe_step;
   }
