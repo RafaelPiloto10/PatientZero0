@@ -7,11 +7,9 @@ let mmap;
 let graph;
 
 function setup() {
-  let container = document.getElementById("p5container");
   colorMode(HSB, 360, 100, 100);
   canvas = createCanvas(600, 600);
   simulation = new Simulation(tot_num_of_states, "21 January 2020");
-  canvas.parent("p5canvas");
   mmap = new Map();
   createButtons();
   graph = new CanvasJS.Chart("chartContainer", {
