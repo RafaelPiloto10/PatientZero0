@@ -1,4 +1,4 @@
-/* global state_data, frameCount, Country, State, fill, text, width, height, currentDisplay, displayNewsStatus*/
+/* global state_data, frameCount, Country, State, random, fill, text, width, height, currentDisplay, displayNewsStatus*/
 
 class Simulation {
   /* 
@@ -18,9 +18,9 @@ class Simulation {
     Simulation.median_household_income = 63179.0;
     Simulation.healthcare_fund_per_person =
       Simulation.median_household_income * Simulation.heathcare_tax;
-    Simulation.PPE_cost = 2;
     Simulation.advertisement_cost = 400000;
-    Simulation.quarentine_cost = 25000000000;
+    Simulation.quarantine_cost = 25000000000;
+    Simulation.PPE_step = 0.002;
 
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
@@ -51,8 +51,16 @@ class Simulation {
     Simulation.date.setDate(Simulation.date.getDate() + 1);
     this.country.step();
     displayNewsStatus();
+    
+    // has a random chance to give a random country +1 infected
+    if(random(0,100)<11){
+      let random_state = random(this.country.states);
+      console.log("Randomly infected " + random_state.id);
+      random_state.infect(1, Simulation.date);
+    }
+    
   }
-
+  
   /*
     Update function - called every frame
     Checks if the game should step a day and handles draw calls
@@ -79,12 +87,13 @@ class Simulation {
   */
   createStates() {
     let states = [];
-
+    this.country_population = 0;
     for (let i = 0; i < this.num_states; i++) {
       // lon, lat, id, pop, pop_density, state_init_infected, revenue, state_init_ppe, spread_rate
       let state = state_data[i];
       let revenue = state.Pop * Simulation.healthcare_fund_per_person;
       let init_ppe = 1;
+      this.country_population += state.Pop;
       states.push(
         new State(
           state.longitude,
@@ -99,6 +108,7 @@ class Simulation {
         )
       );
     }
+    Simulation.PPE_cost = this.country_population * 2;
     return states;
   }
 

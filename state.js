@@ -211,7 +211,7 @@ class State {
   }
   
   use_ppe() {
-    this.spread_rate -= Simulation.ppe_step;
+    this.spread_rate -= Simulation.PPE_step;
   }
   
   quarantine(toggle=!this.quarantined) {

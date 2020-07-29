@@ -6,19 +6,19 @@ let btn_Advertise, btn_Display, btn_StartQuarantine, btn_UsePPE;
 let isBudgetDisplayed, currentNews, currentDisplay;
 function createButtons() {
   textSize(15);
-  btn_Advertise = createButton("Broadcast Advertisements\nCost: $" +abbreviateNumber(simulation.advertisement_cost));
+  btn_Advertise = createButton("Broadcast Advertisements\nCost: $" +abbreviateNumber(Simulation.advertisement_cost));
   btn_Advertise.position(5, height + 10);
   btn_Advertise.size(110, 55);
   btn_Advertise.mousePressed(advertise);
 
-  btn_StartQuarantine=createButton("Quarantine!\nThis will be expensive.");
-  btn_StartQuarantine.position(width+10,height/2);
-  btn_StartQuarantine.size(110,50);
+  btn_StartQuarantine=createButton("Quarantine!\nCost: $" + abbreviateNumber(Simulation.quarantine_cost));
+  btn_StartQuarantine.position(115 ,height + 10);
+  btn_StartQuarantine.size(110,55);
   btn_StartQuarantine.mousePressed(quarantine)
   
-  btn_UsePPE=createButton("Use PPE\n");
-  btn_UsePPE.position(width+10, height);
-  btn_UsePPE.size(110,50);
+  btn_UsePPE=createButton("Use PPE\nCost: $" + abbreviateNumber(Simulation.PPE_cost));
+  btn_UsePPE.position(225, height + 10);
+  btn_UsePPE.size(110,55);
   btn_UsePPE.mousePressed(usePPE)
   
   btn_Display = createButton("Click Here to cycle between your budget, or the news.");
