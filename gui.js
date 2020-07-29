@@ -31,22 +31,24 @@ function displayNewsStatus() {
     // Display the budget if it is selected
     currentDisplay = "You have $" + "Million in bank.";
   } else {
+    
     for (let i = 0; i < simulation.country.states.length; i++) {
-      //will display if any state has "discovered" COVID
       if (
-        simulation.country.states[i].not_reported_infected &&
-        simulation.country.states[i].state_infected != 0 &&
-        (simulation.country.states[i].state_infected >= 30 ||
-          random(0, 100) >= 95)
+        simulation.country.states[i].not_reported_immunity &&
+        simulation.country.states[i].state_deaths +
+          simulation.country.states[i].state_recovered ==
+          simulation.country.states[i].population
       ) {
         currentNews =
-          "" + state_data[i].State + " has been confirmed infected!";
-        simulation.country.states[i].not_reported_infected = false;
+          "" + state_data[i].State + " is now immune to COVID-19!";
+        simulation.country.states[i].not_reported_immune = false;
         currentDisplay = currentNews;
         return;
       }
+      currentDisplay = currentNews;
     }
-    if (simulation.country.statistics.total_infected > 10000)
+    
+    if (simulation.country.statistics.total_infected > 50000)
       //estimates how many infected are in a state if there is enough
       for (let i = 0; i < 100; i++) {
         let state = random(simulation.country.states);
@@ -65,13 +67,14 @@ function displayNewsStatus() {
           return;
         }
       }
-    //displays if a state has become immune to COVID
+    
     for (let i = 0; i < simulation.country.states.length; i++) {
+      //will display if any state has "discovered" COVID
       if (
-        simulation.country.states[i].not_reported_immunity &&
-        simulation.country.states[i].state_deaths +
-          simulation.country.states[i].state_recovered ==
-          simulation.country.states[i].population
+        simulation.country.states[i].not_reported_infected &&
+        simulation.country.states[i].state_infected != 0 &&
+        (simulation.country.states[i].state_infected >= 30 ||
+          random(0, 100) >= 95)
       ) {
         currentNews =
           "" + state_data[i].State + " has been confirmed infected!";
@@ -79,7 +82,6 @@ function displayNewsStatus() {
         currentDisplay = currentNews;
         return;
       }
-      currentDisplay = currentNews;
     }
   }
 }
