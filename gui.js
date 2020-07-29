@@ -52,7 +52,7 @@ function displayNewsStatus() {
       //estimates how many infected are in a state if there is enough
       for (let i = 0; i < 100; i++) {
         let state = random(simulation.country.states);
-        if (!state.not_reported_infected && state.state_infected > 100) {
+        if (!state.not_reported_infected && state.not_reported_immunity && state.state_infected > 100) {
           let infected_estimate = Math.pow(
             Math.round(Math.sqrt(state.state_infected)),
             2
