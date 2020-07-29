@@ -18,14 +18,15 @@ class Simulation {
     Simulation.median_household_income = 63179.0/24; // income biweekly
     Simulation.healthcare_fund_per_person =
       Simulation.median_household_income * Simulation.healthcare_tax;
-    Simulation.advertisement_cost = 400000;
+    Simulation.advertisement_cost = 400 * 1000000; // 400M
     Simulation.quarantine_cost = 25000000000;
     Simulation.PPE_step = 0.002;
+    Simulation.advertise_awareness_step = 0.00002;
 
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
-    this.start_funds = 2.5 * 1000000000000 * .5; // Starting funds
+    this.start_funds = 0; //2.5 * 1000000000000 * .5; // Starting funds
     this.start_ppe = 20000; // How much PPE is available at the start of the game
     this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
@@ -130,17 +131,5 @@ class Simulation {
       20,
       height - 15
     );
-  }
-
-  quarantine() {
-    this.country.quarantine();
-  }
-
-  usePPE() {
-    this.country.usePPE();
-  }
-
-  advertise() {
-    this.country.advertise();
   }
 }
