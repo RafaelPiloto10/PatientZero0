@@ -44,6 +44,7 @@ class Country {
     let spread_rate = 0;
     let total_new_cases = 0;
     this.revenue = 0;
+    
     this.simulate_random_travel(Simulation.date);
     for (let state of this.states) {
       total_new_cases += state.step();
@@ -51,7 +52,7 @@ class Country {
       recovered += state.state_recovered;
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
-      this.revenue += state.revenue;
+      this.revenue += state.quarantined? 0 : state.revenue;
       if(!state.quarantined && frameCount % (simulation.time_step * 15) == 0){
         this.funds += state.collect_healthcare_tax();
       }

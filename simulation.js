@@ -15,7 +15,7 @@ class Simulation {
     Simulation.spread_rate_step = 0.00000000001;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
-    Simulation.median_household_income = 63179.0/24; // income biweekly
+    Simulation.median_household_income = 30000 / 24; // 63179.0 / 24; // income biweekly
     Simulation.healthcare_fund_per_person =
       Simulation.median_household_income * Simulation.healthcare_tax;
     Simulation.advertisement_cost = 400 * 1000000; // 400M
