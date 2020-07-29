@@ -94,6 +94,7 @@ class State {
   */
   step() {
     let current_date = Simulation.date;
+    let predicted_new_cases;
     if (
       this.state_infected > 0 &&
       this.state_recovered + this.state_deaths <= this.population
@@ -105,7 +106,7 @@ class State {
         current_date
       );
       // let predicted_cases = this.get_predicted_cases_SIR();
-      let predicted_new_cases = predicted_cases - this.state_infected;
+      predicted_new_cases = predicted_cases - this.state_infected;
 
       this.infect(predicted_new_cases, current_date);
     }
@@ -113,6 +114,7 @@ class State {
     this.state_recovered = constrain(this.state_recovered, 0, this.population);
     this.state_deaths = constrain(this.state_deaths, 0, this.population); 
     this.prob_person_has_covid = this.state_infected / this.population;
+    return predicted_new_cases;
     
   }
 

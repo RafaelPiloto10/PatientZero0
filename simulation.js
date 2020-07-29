@@ -32,7 +32,6 @@ class Simulation {
     this.time_step = 75 // 150; // frames per day - ie. For every N frames, it is a new day
     this.paused = false;    
 
-    
     // states, init_funds, init_ppe, init_spread_rate, init_infected
     this.country = new Country(this.createStates(), 0, this.start_ppe, Simulation.spread_rate, this.num_patient_zeros);
   }

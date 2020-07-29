@@ -30,6 +30,7 @@ class Country {
     };
 
     this.patient_zero();
+    this.new_cases = [];
   }
 
   /*
@@ -50,7 +51,7 @@ class Country {
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
     }
-
+    this.new_cases.push(infected - this.)
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;

@@ -13,10 +13,10 @@ function setup() {
   mmap = new Map();
   createButtons();
   graph = new CanvasJS.Chart("chartContainer", {
-    e
+    exportEnabled: true,
     title: { text: "New Cases per Day" },
-    axisY: { title: "New Confirmed Cases" },
-    data: [{type: "splineArea", color:"rgba(255, 0, 0, .7)", markerSize: 5}]
+    axisY: { title: "New Confirmed Cases", includeZero: true},
+    data: [{type: "splineArea", color:"rgba(255, 0, 0, .7)", markerSize: 0 }]
   })
 }
 
