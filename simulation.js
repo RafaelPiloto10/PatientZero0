@@ -14,7 +14,7 @@ class Simulation {
     Simulation.start_date = new Date(start_date); // Date of patient zer0
     Simulation.mortality_rate = 0.035; // Avg. COVID 19 Mortality rate from WHO - https://www.who.int/docs/default-source/coronaviruse/situation-reports/20200306-sitrep-46-covid-19.pdf?sfvrsn=96b04adf_4
     Simulation.spread_rate = 0.288;
-    Simulation.spread_rate_step = 0.0000001;
+    Simulation.spread_rate_step = 0.00000000001;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
     Simulation.median_household_income = 63179.00;
@@ -23,9 +23,8 @@ class Simulation {
     this.states = state_data; // State data including population
 
     this.start_funds = 2.5 * 1000000000000; // Starting funds
-    this.start_ppe = 1; // How much PPE is available at the start of the game
-    this.start_spread_rate = 1; // The spread rate of the virus at the start of the game
-    this.num_patient_zeros = 1; // How many people are infected at the start of the game
+    this.start_ppe = 1.0; // How much PPE is available at the start of the game
+    this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
     Simulation.date = new Date(start_date);
     this.time_step = 30 // 150; // frames per day - ie. For every N frames, it is a new day
@@ -33,7 +32,7 @@ class Simulation {
 
     
     // states, init_funds, init_ppe, init_spread_rate, init_infected
-    this.country = new Country(this.createStates(), 0, this.start_ppe, this.start_spread_rate, this.num_patient_zeros);
+    this.country = new Country(this.createStates(), 0, this.start_ppe, Simulation.spread_rate, this.num_patient_zeros);
   }
 
   /*

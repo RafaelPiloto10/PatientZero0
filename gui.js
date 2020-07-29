@@ -2,7 +2,7 @@
 global createButton, height, textSize, width, simulation, random, state_data
 
 */
-let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews, currentDisplay;
+let btn_Advertise, btn_Display, isBudgetDisplayed, currentNews, currentDisplay, maxInfected;
 function createButtons() {
   textSize(15);
   btn_Advertise = createButton("Advertise Awareness");
@@ -17,6 +17,7 @@ function createButtons() {
   isBudgetDisplayed = false;
   currentNews = "There is no news at the moment.";
   currentDisplay = currentNews;
+  maxInfected=0;
 }
 
 function advertise() {}
@@ -46,7 +47,9 @@ function displayNewsStatus() {
         return;
       }
     }
-    if (simulation.country.statistics.total_infected > 10000) //estimates how many infected are in a state if there is enough
+    if (simulation.country.statistics.total_infected>maxInfected)
+      maxInfected=simulation.country.statistics.total_infected
+    if (maxInfected > 1000) //estimates how many infected are in a state if there is enough
       if (Math.random(0, 10) > 5)
         while (true) {
           let state = random(simulation.country.states);
@@ -60,19 +63,18 @@ function displayNewsStatus() {
               infected_estimate +
               " infected in " +
               state.id +
-              "!";
+              ".";
             currentDisplay = currentNews;
             return;
           }
         }
-    // while (true) { //displays if a state has become immune to COVID
-    //   let state = random(simulation.country.states);
-    //   if (state.state_recovered + state.state_deaths >= state.population) {
-    //     currentNews = state.id + " Has become immune to COVID-19!";
-    //     currentDisplay = currentNews;
-    //     return;
-    //   }
-    //   currentDisplay = currentNews;
-    // }
+      //displays if a state has become immune to COVID
+      let state = random(simulation.country.states);
+      if (state.state_recovered + state.state_deaths >= state.population) {
+        currentNews = state.id + " Has become immune to COVID-19!";
+        currentDisplay = currentNews;
+        return;
+      }
+    currentDisplay = currentNews;
   }
 }
