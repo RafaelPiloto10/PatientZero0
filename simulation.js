@@ -25,7 +25,7 @@ class Simulation {
     this.num_states = num_states; // How many states should be considered in the model
     this.states = state_data; // State data including population
 
-    this.start_funds = 2.5 * 1000000000000; // Starting funds
+    this.start_funds = 2.5 * 1000000000000 * .5; // Starting funds
     this.start_ppe = 20000; // How much PPE is available at the start of the game
     this.num_patient_zeros = 1.0; // How many people are infected at the start of the game
 
@@ -133,23 +133,14 @@ class Simulation {
   }
 
   quarantine() {
-    this.funds -= Simulation.quarantine_cost;
-    for (let state of this.states) {
-      state.quarantine();
-    }
+    this.country.quarantine();
   }
 
   usePPE() {
-    this.funds -= Simulation.use_PPE_cost;
-    for (let state of this.states) {
-      state.usePPE();
-    }
+    this.country.usePPE();
   }
 
   advertise() {
-    this.funds -= Simulation.advertise_cost;
-    for (let state of this.states) {
-      state.advertise();
-    }
+    this.country.advertise();
   }
 }

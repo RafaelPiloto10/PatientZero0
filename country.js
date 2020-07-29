@@ -51,6 +51,7 @@ class Country {
       recovered += state.state_recovered;
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
+      console.log(state.collect_heathcare_tax());
       if(!state.quarantined) this.revenue += state.collect_healthcare_tax();
     }
     this.new_cases.push({x: new Date(Simulation.date), y: total_new_cases});
@@ -137,9 +138,8 @@ class Country {
   }
   
   usePPE() {
-    
+    this.funds -= Simulation.PPE_cost;
     for(let state of this.states) {
-      this.funds -= state.get_ppe_cost()
       state.use_ppe();
     }
   }
