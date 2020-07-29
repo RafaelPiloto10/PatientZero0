@@ -24,12 +24,12 @@ class Map {
     ) {
       let state = simulation.country.states[i];
       let pos = myMap.latLngToPixel(state.coords.x, state.coords.y);
-      let maxSize = (state_data[i].LandArea * Math.pow(myMap.zoom(), 3)) / 200000;
-      let size = map(constrain(state.prob_person_has_covid, 0, 1), 0, 1, 2, maxSize);
+      let size = (state_data[i].LandArea * Math.pow(myMap.zoom(), 3)) / 200000;
+      // let size = map(constrain(state.prob_person_has_covid, 0, 1), 0, 1, 2, maxSize);
       if (size < 2 * myMap.zoom()) size = 2 * myMap.zoom();
       fill(
         0,
-        map(state.state_infected, 0, state.population, 30, 100),
+        map(state.state_infected, 0, state.population, 10, 100),
         80,
         map(state.state_infected, 0, state.population, .3, .7)
       );
