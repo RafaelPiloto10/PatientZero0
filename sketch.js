@@ -14,8 +14,9 @@ function setup() {
   createButtons();
   graph = new CanvasJS.Chart("chartContainer", {
     exportEnabled: true,
-    title: { text: "Δ Cases Over Time (days)" },
+    title: { text: "Δ Predicted Cases Over Time)" },
     axisY: { title: "Δ Confirmed Cases", includeZero: true },
+    axisX: {title: "Time"},
     data: [
       {
         type: "spline",

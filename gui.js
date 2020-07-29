@@ -31,8 +31,8 @@ function createButtons() {
   btn_Display = createButton(
     "Click here to cycle between your budget, or the news."
   );
-  btn_Display.size(110, 100);
-  btn_Display.position(width + 10, 10);
+  btn_Display.size(110,  55);
+  btn_Display.position(width - 110, height + 10);
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed = false;
   currentNews = "There is no news at the moment.";
@@ -60,7 +60,7 @@ function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
     currentDisplay =
-      "You have $" + abbreviateNumber(simulation.country.funds) + " in bank.\nBiweekly revenue: " + abbreviateNumber(simulation.country.revenue);
+      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\nBiweekly revenue: " + abbreviateNumber(simulation.country.revenue);
   } else {
     currentDisplay = currentNews;
     for (let i = 0; i < simulation.country.states.length; i++) {
