@@ -51,7 +51,11 @@ class Country {
       recovered += state.state_recovered;
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
-      if(!state.quarantined) this.funds += state.collect_healthcare_tax();
+
+      if(!state.quarantined && frameCount % (simulation.time_step * 15) == 0){
+        console.log("Received state healthcare taxes");
+        this.funds += state.collect_healthcare_tax();
+      }
     }
     this.new_cases.push({x: new Date(Simulation.date), y: total_new_cases});
     this.statistics.deaths = dead;

@@ -60,7 +60,7 @@ function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
     currentDisplay =
-      "You have $" + abbreviateNumber(simulation.country.funds) + " in bank.";
+      "You have $" + abbreviateNumber(simulation.country.funds) + " in bank.\nBiweekly revenue: " + simulation.country;
   } else {
     currentDisplay = currentNews;
     for (let i = 0; i < simulation.country.states.length; i++) {

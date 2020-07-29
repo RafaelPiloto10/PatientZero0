@@ -15,7 +15,7 @@ class Simulation {
     Simulation.spread_rate_step = 0.00000000001;
     Simulation.recovery_time = 14; // 14 days recovery time
     Simulation.healthcare_tax = 0.05; // Healthcare tax
-    Simulation.median_household_income = 63179.0;
+    Simulation.median_household_income = 63179.0/24; // income biweekly
     Simulation.healthcare_fund_per_person =
       Simulation.median_household_income * Simulation.healthcare_tax;
     Simulation.advertisement_cost = 400000;
@@ -55,11 +55,8 @@ class Simulation {
     // has a random chance to give a random country +1 infected
     if(random(0,100)<16){
       let random_state = random(this.country.states);
-      if(random_state.not_reported_immunity)
-      {
-        console.log("Randomly infected " + random_state.id);
-        random_state.infect(1, Simulation.date);
-      }
+      console.log("Randomly infected " + random_state.id);
+      random_state.infect(1, Simulation.date);
     }
     
   }

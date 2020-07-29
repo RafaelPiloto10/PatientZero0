@@ -202,7 +202,7 @@ class State {
     return Math.floor(a * (S) * (this.state_infected) -  b * this.state_infected);
   }
   
-  advertise_awareness() {
+  advertise() {
     this.spread_rate -= Simulation.advertise_awareness_step;
   }
   
