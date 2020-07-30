@@ -10,6 +10,8 @@ The goal of Patient Zer0 is to help users understand the importance of protectiv
 
 This simulation is in no way reflective of real world predictions. The simulation is elementary in nature meaning that, although the data and constants used in this simulation are accurate to data gathered in the real world, nature is unpredictable and this model only considers very small factors of the pandemic.
 
+Please refer to the [CDC Guidelines on COVID-19](https://www.cdc.gov/coronavirus/2019-ncov/index.html) for more accurate information.
+
 ## Assumptions: 
 
 Assumptions the simulation makes include - 
