@@ -27,6 +27,12 @@ Assumptions the simulation makes include -
 - The recovery time for the virus is strictly 14 days. Anyone who does not die to the virus after 14 days has recovered.
 - There is no travel between countries.
 
+## Presentation
+
+What did you originally set out to build? Who is it for?
+
+- We set out to build a game to help users understand the importance of protective measures against COVID-19 by visualizing their impact through a simulation where the user has the power.
+
 ## TODO:
  - None ATM
 
