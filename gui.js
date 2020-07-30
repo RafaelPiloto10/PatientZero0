@@ -30,10 +30,8 @@ function createButtons() {
   btn_UsePPE.size(btnw, btnh);
   btn_UsePPE.mousePressed(usePPE);
 
-  btn_Display = createButton(
-    "← Cycle Display"
-  );
-  btn_Display.size(btnw,  btnh);
+  btn_Display = createButton("← Cycle Display");
+  btn_Display.size(btnw, btnh);
   btn_Display.position(width + 10, 10);
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed = false;
@@ -62,7 +60,13 @@ function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
     currentDisplay =
-      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\nTax Funding: " + abbreviateNumber(simulation.country.revenue )+ " in " + (simulation.country.days_till_pay) + " days";
+      "United States Healthcare Budget: $" +
+      abbreviateNumber(simulation.country.funds) +
+      "\nTax Funding: " +
+      abbreviateNumber(simulation.country.revenue) +
+      " in " +
+      simulation.country.days_till_pay +
+      " days";
   } else {
     currentDisplay = currentNews;
     for (let i = 0; i < simulation.country.states.length; i++) {
@@ -72,34 +76,34 @@ function displayNewsStatus() {
           simulation.country.states[i].state_recovered ==
           simulation.country.states[i].population
       ) {
-        currentNews = "Breaking News: " + state_data[i].State + " is now immune to COVID-19!";
+        currentNews =
+          "Breaking News: " +
+          state_data[i].State +
+          " is now immune to COVID-19!";
         simulation.country.states[i].not_reported_immunity = false;
         currentDisplay = currentNews;
         return;
       }
     }
 
-      //estimates how many infected are in a state if there is enough
-      for (let i = 0; i < 10; i++) {
-        let state = random(simulation.country.states);
-        if (
-          !state.not_reported_infected &&
-          state.state_infected > 1500
-        ) {
-          let infected_estimate = Math.pow(
-            Math.round(Math.sqrt(state.state_infected)),
-            2
-          );
-          currentNews =
-            "Breaking News: Estimates show there are " +
-            abbreviateNumber(infected_estimate) +
-            " infected in " +
-            state.id +
-            ".";
-          currentDisplay = currentNews;
-          return;
-        }
+    //estimates how many infected are in a state if there is enough
+    for (let i = 0; i < 10; i++) {
+      let state = random(simulation.country.states);
+      if (!state.not_reported_infected && state.state_infected > 1500) {
+        let infected_estimate = Math.pow(
+          Math.round(Math.sqrt(state.state_infected)),
+          2
+        );
+        currentNews =
+          "Breaking News: Estimates show there are " +
+          abbreviateNumber(infected_estimate) +
+          " infected in " +
+          state.id +
+          ".";
+        currentDisplay = currentNews;
+        return;
       }
+    }
     if (simulation.country.statistics.total_infected < 10000)
       for (let i = 0; i < simulation.country.states.length; i++) {
         //will display if any state has "discovered" COVID
@@ -110,7 +114,9 @@ function displayNewsStatus() {
             random(0, 100) >= 95)
         ) {
           currentNews =
-            "Breaking News: " + state_data[i].State + " has been confirmed infected!";
+            "Breaking News: " +
+            state_data[i].State +
+            " has been confirmed infected!";
           simulation.country.states[i].not_reported_infected = false;
           currentDisplay = currentNews;
           return;

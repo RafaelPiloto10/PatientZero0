@@ -53,13 +53,13 @@ class Country {
       recovered += state.state_recovered;
       dead += state.state_deaths;
       spread_rate += state.spread_rate;
-      this.revenue += state.quarantined? 0 : state.revenue;
-      if(!state.quarantined && frameCount % (simulation.time_step * 15) == 0){
+      this.revenue += state.quarantined ? 0 : state.revenue;
+      if (!state.quarantined && frameCount % (simulation.time_step * 15) == 0) {
         this.funds += state.collect_healthcare_tax();
         this.days_till_pay = 15;
       }
     }
-    this.new_cases.push({x: new Date(Simulation.date), y: total_new_cases});
+    this.new_cases.push({ x: new Date(Simulation.date), y: total_new_cases });
     this.statistics.deaths = dead;
     this.statistics.total_infected = infected;
     this.statistics.recovered = recovered;
@@ -126,27 +126,25 @@ class Country {
       }
     }
   }
-  
+
   quarantine() {
-    if(!this.states[0].quarantined) this.funds -= Simulation.quarantine_cost; 
-    for(let state of this.states) {
+    if (!this.states[0].quarantined) this.funds -= Simulation.quarantine_cost;
+    for (let state of this.states) {
       state.quarantine();
     }
-    
   }
-  
+
   advertise() {
     this.funds -= Simulation.advertisement_cost;
-    for(let state of this.states) {
+    for (let state of this.states) {
       state.advertise();
     }
   }
-  
+
   usePPE() {
     this.funds -= Simulation.PPE_cost;
-    for(let state of this.states) {
+    for (let state of this.states) {
       state.use_ppe();
     }
   }
-  
 }

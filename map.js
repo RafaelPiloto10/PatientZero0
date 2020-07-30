@@ -29,9 +29,11 @@ class Map {
       if (size < 2 * myMap.zoom()) size = 2 * myMap.zoom();
       fill(
         0,
-        Math.floor(map(state.state_infected, 0, state.population * .05, 10, 100)),
+        Math.floor(
+          map(state.state_infected, 0, state.population * 0.05, 10, 100)
+        ),
         80,
-        map(state.state_infected, 0, state.population, .3, .7)
+        map(state.state_infected, 0, state.population, 0.3, 0.7)
       );
       circle(pos.x, pos.y, size);
     }

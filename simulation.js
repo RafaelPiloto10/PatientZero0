@@ -52,16 +52,15 @@ class Simulation {
     Simulation.date.setDate(Simulation.date.getDate() + 1);
     this.country.step();
     displayNewsStatus();
-    
+
     // has a random chance to give a random country +1 infected
-    if(random(0,100)<16){
+    if (random(0, 100) < 16) {
       let random_state = random(this.country.states);
       console.log("Randomly infected " + random_state.id);
       random_state.infect(1, Simulation.date);
     }
-    
   }
-  
+
   /*
     Update function - called every frame
     Checks if the game should step a day and handles draw calls
@@ -127,7 +126,11 @@ class Simulation {
       height - 40
     );
     text(
-      `Population Infected: ${abbreviateNumber(this.country.statistics.total_infected)} Deaths: ${abbreviateNumber(this.country.statistics.deaths)} Recovered: ${abbreviateNumber(this.country.statistics.recovered)}`,
+      `Population Infected: ${abbreviateNumber(
+        this.country.statistics.total_infected
+      )} Deaths: ${abbreviateNumber(
+        this.country.statistics.deaths
+      )} Recovered: ${abbreviateNumber(this.country.statistics.recovered)}`,
       20,
       height - 15
     );

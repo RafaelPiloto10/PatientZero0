@@ -14,11 +14,11 @@ This simulation is in no way reflective of real world predictions. The simulatio
 
 Please refer to the [CDC Guidelines on COVID-19](https://www.cdc.gov/coronavirus/2019-ncov/index.html) for more accurate information.
 
-## Assumptions: 
+## Assumptions:
 
-Assumptions the simulation makes include - 
+Assumptions the simulation makes include -
 
-- Everyone in the United States is earning the median household income of approx. $60K.
+- Everyone in the United States is earning the median household income of approx. \$60K.
 - Everyone is given and uses PPE at user given times and the impact it makes is permanent.
 - The virus spread is modeled using an exponential function with varying spread rates.
 - Those who recover cannot be infected again.
@@ -43,14 +43,15 @@ Assumptions the simulation makes include -
 
 [Rafael] What bugs do you have left that are still "bugging" you?
 
-- Fortunately, after playing debugger so often in our meets, we were able to get rid of any game breaking bugs. Although not bug, the simplicity of our simulation overlooks a lot of factors of the COVID-19 pandemic, which in some cases can give it odd behavior. 
+- Fortunately, after playing debugger so often in our meets, we were able to get rid of any game breaking bugs. Although not a bug, the simplicity of our simulation overlooks a lot of factors of the COVID-19 pandemic, which in some cases can give it odd behavior.
 
 [Diego] If you had more time, what other features / ideas would you add?
 
-- We would like to add more user responses to the pandemic as well as include more real-world factors in the model. The idea of training a machine learning model to this simulation and see how the model would respond to the virus is also intriguing. 
+- We would like to add more user responses to the pandemic as well as include more real-world factors in the model. The idea of training a machine learning model to this simulation and seeing how the model would respond to the virus is also intriguing.
 
 ## TODO:
- - None ATM
+
+- None ATM
 
 ## Known Bugs:
 
@@ -83,4 +84,4 @@ Assumptions the simulation makes include -
 - [Modeling virus spread with population density](https://www.sciencedirect.com/science/article/pii/S0025556413001235)
 - [Median Household income in US](https://www.investopedia.com/personal-finance/what-average-income-us/)
 - [5% of taxes are for healthcare related services](https://www.crfb.org/papers/american-health-care-health-spending-and-federal-budget)
-- [Quarentine costs US $25 Billion per day](https://www.bizjournals.com/stlouis/news/2020/04/14/quarantine-costs-u-s-25-billion-a-day-st-louis.html)
+- [Quarentine costs US \$25 Billion per day](https://www.bizjournals.com/stlouis/news/2020/04/14/quarantine-costs-u-s-25-billion-a-day-st-louis.html)

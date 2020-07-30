@@ -44,13 +44,13 @@ class State {
 
     this.has_patient_zero = false;
     this.infection_stack = [];
-      
+
     this.quarantined = false;
 
     this.prob_person_has_covid = this.state_infected / this.population;
-      
-    this.not_reported_infected=true; //If the state has been reported on the news to be infected
-    this.not_reported_immunity=false;//If the state has been reported on the news to be immune
+
+    this.not_reported_infected = true; //If the state has been reported on the news to be infected
+    this.not_reported_immunity = false; //If the state has been reported on the news to be immune
   }
 
   /*
@@ -71,24 +71,28 @@ class State {
       );
       return false;
     }
-    infected_amount = constrain(infected_amount, 0, this.population - this.state_recovered - this.state_deaths);
+    infected_amount = constrain(
+      infected_amount,
+      0,
+      this.population - this.state_recovered - this.state_deaths
+    );
     this.state_infected += infected_amount;
     this.spread_rate += infected_amount * Simulation.spread_rate_step;
-    
-    this.infection_stack.push({ infected_amount, date: new Date(date) });
-//     if (
-//       this.state_infected >
-//       this.population - this.state_recovered - this.state_deaths
-//     ) {
-//       this.state_infected =
-//         this.population - this.state_recovered - this.state_deaths;
-//       console.error(
-//         `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
-//       );
-//       return false;
-//     }
 
-//     return true;
+    this.infection_stack.push({ infected_amount, date: new Date(date) });
+    //     if (
+    //       this.state_infected >
+    //       this.population - this.state_recovered - this.state_deaths
+    //     ) {
+    //       this.state_infected =
+    //         this.population - this.state_recovered - this.state_deaths;
+    //       console.error(
+    //         `State: ${this.id}: overflow in infections - constrained to susceptible population-recovered!`
+    //       );
+    //       return false;
+    //     }
+
+    //     return true;
   }
 
   /*
@@ -103,11 +107,11 @@ class State {
     ) {
       // Only if we have an infected citizen should the virus spread
       this.update_infection_stack(current_date);
-      
+
       let predicted_cases = this.get_predicted_cases_exponentially(
         current_date
       );
-      if(!this.quarantined){
+      if (!this.quarantined) {
         // let predicted_cases = this.get_predicted_cases_SIR();
         predicted_new_cases = predicted_cases - this.state_infected;
 
@@ -116,10 +120,9 @@ class State {
     }
     this.state_infected = constrain(this.state_infected, 0, this.population);
     this.state_recovered = constrain(this.state_recovered, 0, this.population);
-    this.state_deaths = constrain(this.state_deaths, 0, this.population); 
+    this.state_deaths = constrain(this.state_deaths, 0, this.population);
     this.prob_person_has_covid = this.state_infected / this.population;
     return predicted_new_cases || 0;
-    
   }
 
   /*
@@ -131,27 +134,30 @@ class State {
   update_infection_stack(date) {
     let deaths = 0;
     let recovered = 0;
-    
+
     for (let i = 0; i < this.infection_stack.length; i++) {
       let infection = this.infection_stack[i];
-      if(infection.infected_amount <= 0){
+      if (infection.infected_amount <= 0) {
         this.infection_stack.splice(i, 1);
         continue;
       }
       let d = getNumberDays(Simulation.date, infection.date);
       if (d >= Simulation.recovery_time) {
         recovered += infection.infected_amount;
-        this.spread_rate -= (Simulation.spread_rate_step  + 0.000001) * infection.infected_amount;
+        this.spread_rate -=
+          (Simulation.spread_rate_step + 0.000001) * infection.infected_amount;
         this.infection_stack.splice(i, 1);
       } else {
-          let r = random();
-          if (r < Simulation.mortality_rate) {
-            let _deaths = Math.floor(Simulation.mortality_rate * infection.infected_amount);
-            infection.infected_amount -= _deaths;
-            deaths += _deaths;
-            this.spread_rate -= (Simulation.spread_rate_step + 0.000001) * _deaths;
-          }
-        
+        let r = random();
+        if (r < Simulation.mortality_rate) {
+          let _deaths = Math.floor(
+            Simulation.mortality_rate * infection.infected_amount
+          );
+          infection.infected_amount -= _deaths;
+          deaths += _deaths;
+          this.spread_rate -=
+            (Simulation.spread_rate_step + 0.000001) * _deaths;
+        }
       }
     }
 
@@ -178,9 +184,9 @@ class State {
     );
     // Predict the number of cases using an exponential function ---
     // The predicted number of cases as a function of time
-    return !this.quarantined ? Math.floor(
-      Math.exp(this.spread_rate * delta_time_in_days)
-    ) : 0;
+    return !this.quarantined
+      ? Math.floor(Math.exp(this.spread_rate * delta_time_in_days))
+      : 0;
   }
 
   /*
@@ -195,28 +201,35 @@ class State {
     // where B is the per capita transmission rate, S is the number of susceptible people, I is the number of infected
     // R is the number of people recovered, and N is the population number
     // B can be calculated using B = pC where p is the probability of infection and C is the individual contact rate
-    let S = this.population - this.state_infected - this.state_recovered - this.state_deaths;
-    let a = .288;
+    let S =
+      this.population -
+      this.state_infected -
+      this.state_recovered -
+      this.state_deaths;
+    let a = 0.288;
     // let b = this.state_ppe / this.state_ppe_capacity;
     let b = 1 * Math.pow(10, 6);
-    return Math.floor(a * (S) * (this.state_infected) -  b * this.state_infected);
+    return Math.floor(a * S * this.state_infected - b * this.state_infected);
   }
-  
+
   advertise() {
     this.spread_rate -= Simulation.advertise_awareness_step;
   }
-  
+
   use_ppe() {
     this.spread_rate -= Simulation.PPE_step;
   }
-  
-  quarantine(toggle=!this.quarantined) {
-    if(!this.quarantined && toggle) this.patient_zero_date = new Date(Simulation.date);
+
+  quarantine(toggle = !this.quarantined) {
+    if (!this.quarantined && toggle)
+      this.patient_zero_date = new Date(Simulation.date);
     this.quarantined = toggle;
   }
-  
+
   collect_healthcare_tax() {
-    return this.quarantined ? 0:this.population * Simulation.healthcare_fund_per_person;
+    return this.quarantined
+      ? 0
+      : this.population * Simulation.healthcare_fund_per_person;
   }
 }
 
