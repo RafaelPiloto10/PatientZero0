@@ -62,7 +62,7 @@ function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
     currentDisplay =
-      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\ Revenue: " + abbreviateNumber(simulation.country.revenue )+ " in " + (frameCount % simulation.time_step) + " days";
+      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\nTax Funding: " + abbreviateNumber(simulation.country.revenue )+ " in " + (simulation.country.days_till_pay) + " days";
   } else {
     currentDisplay = currentNews;
     for (let i = 0; i < simulation.country.states.length; i++) {

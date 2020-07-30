@@ -31,6 +31,7 @@ class Country {
 
     this.patient_zero();
     this.new_cases = [];
+    this.days_till_pay = 15;
   }
 
   /*
@@ -44,7 +45,7 @@ class Country {
     let spread_rate = 0;
     let total_new_cases = 0;
     this.revenue = 0;
-    
+    this.days_till_pay -= 1;
     this.simulate_random_travel(Simulation.date);
     for (let state of this.states) {
       total_new_cases += state.step();
@@ -55,6 +56,7 @@ class Country {
       this.revenue += state.quarantined? 0 : state.revenue;
       if(!state.quarantined && frameCount % (simulation.time_step * 15) == 0){
         this.funds += state.collect_healthcare_tax();
+        this.days_till_pay = 15;
       }
     }
     this.new_cases.push({x: new Date(Simulation.date), y: total_new_cases});
