@@ -2,6 +2,8 @@
 
 Patient Zer0 is an interactive simulation that gives you the power in controlling the COVID-19 response for the United States.
 
+[Play now!](https://cssi-patient-zer0.glitch.me/)
+
 ## Mission:
 
 The goal of Patient Zer0 is to help users understand the importance of protective measures against COVID-19 by visualizing their impact through a simulation where the user has the power.
