@@ -39,6 +39,7 @@ function draw() {
     clear();
     textAlign(CENTER);
     text("COVID-19 has been eradicated in the US!", width / 2, height / 2);
+    simulation.debug();
     noLoop();
   }
   graph.render();
