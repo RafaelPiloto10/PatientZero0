@@ -4,6 +4,8 @@ global createButton, height, textSize, width, simulation, random, state_data, Si
 */
 let btn_Advertise, btn_Display, btn_StartQuarantine, btn_UsePPE;
 let isBudgetDisplayed, currentNews, currentDisplay;
+let btnw = 140;
+let btnh = 60;
 function createButtons() {
   textSize(15);
   btn_Advertise = createButton(
@@ -11,27 +13,27 @@ function createButtons() {
       abbreviateNumber(Simulation.advertisement_cost)
   );
   btn_Advertise.position(width + 10, 190);
-  btn_Advertise.size(110, 55);
+  btn_Advertise.size(btnw, btnh);
   btn_Advertise.mousePressed(advertise);
 
   btn_StartQuarantine = createButton(
     "Quarantine!\nCost: $" + abbreviateNumber(Simulation.quarantine_cost)
   );
   btn_StartQuarantine.position(width + 10, 130);
-  btn_StartQuarantine.size(110, 55);
+  btn_StartQuarantine.size(btnw, btnh);
   btn_StartQuarantine.mousePressed(quarantine);
 
   btn_UsePPE = createButton(
     "Use PPE\nCost: $" + abbreviateNumber(Simulation.PPE_cost)
   );
   btn_UsePPE.position(width + 10, 70);
-  btn_UsePPE.size(110, 55);
+  btn_UsePPE.size(btnw, btnh);
   btn_UsePPE.mousePressed(usePPE);
 
   btn_Display = createButton(
-    "Click here to cycle between your budget, or the news."
+    "← Cycle Display"
   );
-  btn_Display.size(110,  55);
+  btn_Display.size(btnw,  btnh);
   btn_Display.position(width + 10, 10);
   btn_Display.mousePressed(changeDisplay);
   isBudgetDisplayed = false;
@@ -60,7 +62,7 @@ function displayNewsStatus() {
   if (isBudgetDisplayed) {
     // Display the budget if it is selected
     currentDisplay =
-      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\nBiweekly revenue: " + abbreviateNumber(simulation.country.revenue);
+      "United States Healthcare Budget: $" + abbreviateNumber(simulation.country.funds) + "\ Revenue: " + abbreviateNumber(simulation.country.revenue )+ " in " + (frameCount % simulation.time_step) + " days";
   } else {
     currentDisplay = currentNews;
     for (let i = 0; i < simulation.country.states.length; i++) {
