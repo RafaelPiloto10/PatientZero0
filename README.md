@@ -1,14 +1,26 @@
 # Patient Zer0
 
-## TODO:
+Patient Zer0 is an interactive simulation that gives you the power in controlling the COVID-19 response for the United States.
 
-- Rafael
-  - Implement counter measures that affect spread rate
+## Mission:
+
+The goal of Patient Zer0 is to help users understand the importance of protective measures against COVID-19 by visualizing their impact through a simulation where the user has the power.
+
+## Disclaimer:
+
+This simulation is in no way reflective of real world predictions. The simulation is elementary in nature meaning that, although the data and constants used in this simulation are accurate to data gathered in the real world, nature is unpredictable and this model only considers very small factors of the pandemic.
+
+
+## TODO:
+ - None ATM
 
 ## Known Bugs:
 
+- No known bugs
+
 ## Change log:
 
+- (7/28) Implemented graph & added styling
 - (7/28) Fixed exponential recovery bug by changing spread rate over time - Rafael
 - (7/28) Implemented buttons outside the map that can be programmed to affect the simulation - Diego
 - (7/27) Implemented circles that follow the map position for each state to react to how infected they are with COVID - Diego
