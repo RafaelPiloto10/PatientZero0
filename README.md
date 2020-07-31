@@ -4,6 +4,8 @@ Patient Zer0 is an interactive simulation that gives you the power in controllin
 
 [Play now!](https://cssi-patient-zer0.glitch.me/)
 
+Created by [Rafael Piloto](https://github.com/RafaelPiloto10) and [Diego Rodriguez](https://www.linkedin.com/in/diego-rodriguez-0698521a4)
+
 ## Mission:
 
 The goal of Patient Zer0 is to help users understand the importance of protective measures against COVID-19 by visualizing their impact through a simulation where the user has the power.
